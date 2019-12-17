@@ -8,6 +8,11 @@ public class Shooting : Bolt.EntityBehaviour<ICustomCubeState>
     public float bulletSpeed;
     public GameObject muzzle;
 
+    private void Awake()
+    {
+        transform.parent = GameObject.FindWithTag("image_target").transform;
+    }
+
     private void Shoot()
     {
 
