@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Shooting : MonoBehaviour
+public class Shooting : Bolt.EntityBehaviour<ICustomCubeState>
 {
     public Rigidbody bulletPrefab;
     public float bulletSpeed;
@@ -18,7 +18,7 @@ public class Shooting : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetKey(KeyCode.Space) && entity.IsOwner)
         {
             Shoot();
         }
