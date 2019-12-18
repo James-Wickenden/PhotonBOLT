@@ -10,12 +10,15 @@ public class Shooting : Bolt.EntityBehaviour<ICustomCubeState>
 
     public override void Attached() {
         state.OnShoot = Shoot;
-        state.Health = 100.0F;
+        if (entity.IsOwner) state.Health = 100.0F;
     }
+
+    //public override void OnCollisionEnter(Collision collision) {
+
+    //}
 
     private void Shoot()
     {
-
         Rigidbody bulletClone = Instantiate(bulletPrefab, muzzle.transform.position, this.transform.rotation);
         if (entity.IsOwner) state.Health -= 1F;
         bulletClone.velocity = transform.TransformDirection(new Vector3(0,0, bulletSpeed));
