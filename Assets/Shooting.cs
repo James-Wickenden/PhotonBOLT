@@ -8,6 +8,11 @@ public class Shooting : Bolt.EntityBehaviour<ICustomCubeState>
     public float bulletSpeed;
     public GameObject muzzle;
 
+    public override void Attached() {
+        state.OnShoot = Shoot;
+
+    }
+
     private void Shoot()
     {
 
@@ -18,9 +23,9 @@ public class Shooting : Bolt.EntityBehaviour<ICustomCubeState>
 
     private void Update()
     {
-        if (Input.GetKey(KeyCode.Space) && entity.IsOwner)
+        if (Input.GetKeyDown(KeyCode.Space) && entity.IsOwner)
         {
-            Shoot();
+            state.Shoot();
         }
     }
 }
