@@ -8,6 +8,11 @@ public class Shooting : Bolt.EntityBehaviour<ICustomCubeState>
     public float bulletSpeed;
     public GameObject muzzle;
 
+    public override void Attached()
+    {
+        state.OnShoot = Shoot;
+    }
+
     private void Awake()
     {
         transform.parent = GameObject.FindWithTag("image_target").transform;
@@ -25,7 +30,7 @@ public class Shooting : Bolt.EntityBehaviour<ICustomCubeState>
     {
         if (Input.GetAxis("Fire1") > 0 && entity.IsOwner)
         {
-            Shoot();
+            state.Shoot();
         }
     }
 }

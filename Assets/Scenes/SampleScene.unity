@@ -146,12 +146,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 65338123}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.75, y: 0.028, z: 0}
-  m_LocalScale: {x: 0.05, y: 0.07, z: 1.5}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -5, y: 0.18666665, z: 0}
+  m_LocalScale: {x: 0.3333333, y: 0.46666664, z: 10}
   m_Children: []
-  m_Father: {fileID: 1485092444}
-  m_RootOrder: 1
+  m_Father: {fileID: 1203842099}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &65338125
 BoxCollider:
@@ -329,12 +329,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 706827882}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.75, y: 0.028, z: 0}
-  m_LocalScale: {x: 0.05, y: 0.07, z: 1.5}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 5, y: 0.18666665, z: 0}
+  m_LocalScale: {x: 0.3333333, y: 0.46666664, z: 10}
   m_Children: []
-  m_Father: {fileID: 1485092444}
-  m_RootOrder: 2
+  m_Father: {fileID: 1203842099}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &706827884
 BoxCollider:
@@ -484,17 +484,21 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.15, y: 0.15, z: 0.15}
-  m_Children: []
+  m_Children:
+  - {fileID: 65338124}
+  - {fileID: 706827883}
+  - {fileID: 1670671634}
+  - {fileID: 1464225424}
   m_Father: {fileID: 1485092444}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!43 &1410764881
+--- !u!43 &1416700816
 Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: ImageTargetMesh136904
+  m_Name: ImageTargetMesh15360
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -677,12 +681,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1464225423}
-  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -0, y: 0.028, z: 0.767}
-  m_LocalScale: {x: 0.05, y: 0.07, z: 1.5}
+  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0.18666665, z: 5.1133327}
+  m_LocalScale: {x: 0.33333346, y: 0.46666664, z: 10}
   m_Children: []
-  m_Father: {fileID: 1485092444}
-  m_RootOrder: 4
+  m_Father: {fileID: 1203842099}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!65 &1464225425
 BoxCollider:
@@ -772,7 +776,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1485092438}
-  m_Mesh: {fileID: 1410764881}
+  m_Mesh: {fileID: 1416700816}
 --- !u!23 &1485092440
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -790,7 +794,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 1510855708}
+  - {fileID: 1601059810}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -867,10 +871,6 @@ Transform:
   m_LocalScale: {x: 10, y: 10, z: 10}
   m_Children:
   - {fileID: 1203842099}
-  - {fileID: 65338124}
-  - {fileID: 706827883}
-  - {fileID: 1670671634}
-  - {fileID: 1464225424}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -886,34 +886,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 645f40165367d1b409f2d74fd1f7e7ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!21 &1510855708
-Material:
-  serializedVersion: 6
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 'stones_hiresMaterial
-
-    136914'
-  m_Shader: {fileID: 10752, guid: 0000000000000000f000000000000000, type: 0}
-  m_ShaderKeywords: 
-  m_LightmapFlags: 5
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 93e1498dcf984a4bbbc42f4e9da4ec7a, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Floats: []
-    m_Colors:
-    - _Color: {r: 0.82089555, g: 0.82089555, b: 0.82089555, a: 1}
 --- !u!1 &1569752985
 GameObject:
   m_ObjectHideFlags: 0
@@ -1025,6 +997,34 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 50, y: 0, z: 0}
+--- !u!21 &1601059810
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 'stones_hiresMaterial
+
+    15370'
+  m_Shader: {fileID: 10752, guid: 0000000000000000f000000000000000, type: 0}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 5
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: 93e1498dcf984a4bbbc42f4e9da4ec7a, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats: []
+    m_Colors:
+    - _Color: {r: 0.82089555, g: 0.82089555, b: 0.82089555, a: 1}
 --- !u!1 &1670671633
 GameObject:
   m_ObjectHideFlags: 0
@@ -1051,12 +1051,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1670671633}
-  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -0, y: 0.028, z: -0.767}
-  m_LocalScale: {x: 0.05, y: 0.07, z: 1.5}
+  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0.18666665, z: -5.1133327}
+  m_LocalScale: {x: 0.33333346, y: 0.46666664, z: 10}
   m_Children: []
-  m_Father: {fileID: 1485092444}
-  m_RootOrder: 3
+  m_Father: {fileID: 1203842099}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!65 &1670671635
 BoxCollider:
