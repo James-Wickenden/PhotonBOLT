@@ -9,10 +9,19 @@ public class TurretController : MonoBehaviour
     void Update()
     {
         // Ensure turret's y-rotation follows the camera's
-        var CharacterRotation = Camera.main.transform.rotation;
-        CharacterRotation.x = 0;
-        CharacterRotation.z = 0;
+        Vector3 forward = Camera.main.transform.forward;
+        Vector3 n = new Vector3(0, 1, 0);
+        Vector3 p_0 = new Vector3(0, transform.position.y, 0);
+        Vector3 l_0 = Camera.main.transform.position;
 
-        transform.rotation = CharacterRotation;
+        float denominator = Vector3.Dot(forward, n);
+
+        if (!denominator.Equals(0))
+        {
+            float d = (Vector3.Dot((p_0 - l_0), n)) / denominator;
+            Vector3 p = l_0 + forward * d;
+            transform.LookAt(p);
+        }
+
     }
 }
