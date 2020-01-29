@@ -18,8 +18,12 @@ public class Shooting : Bolt.EntityBehaviour<ICustomCubeState>
 
     private void Shoot()
     {
-        Rigidbody bulletClone = Instantiate(bulletPrefab, muzzle.transform.position, this.transform.rotation);
+        Vector3 spawnLocation = new Vector3(muzzle.transform.position.x, muzzle.transform.position.y, muzzle.transform.position.z + 0.0F);
+        Rigidbody bulletClone = Instantiate(bulletPrefab, spawnLocation, this.transform.rotation);
         bulletClone.velocity = transform.TransformDirection(new Vector3(0,0, bulletSpeed));
+
+        Projectile projectile = bulletClone.GetComponent<Projectile>();
+        projectile.setSourceID(GetInstanceID());
     }
 
     private void Update()

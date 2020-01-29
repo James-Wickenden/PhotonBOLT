@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 7830107971976167870}
   - component: {fileID: 8316609482056541526}
   - component: {fileID: 3170113048420236332}
+  - component: {fileID: 1720714605633952315}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -170,9 +171,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 3235020876552625046, guid: 084d2afb00dc94940a945285b6176228,
     type: 3}
-  bulletSpeed: 5
+  bulletSpeed: 15
   muzzle: {fileID: 6471162242655870104}
-  lastShot: {fileID: 0}
 --- !u!114 &3170113048420236332
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -186,6 +186,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
+--- !u!114 &1720714605633952315
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 417114545390359311}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f0d348e06c848f4d823ca286b8419a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &434836430201497834
 GameObject:
   m_ObjectHideFlags: 0
@@ -415,7 +427,6 @@ GameObject:
   - component: {fileID: 7148109606232214309}
   - component: {fileID: 1987621589879992352}
   - component: {fileID: 387758786602758895}
-  - component: {fileID: 1055720673709390485}
   m_Layer: 0
   m_Name: Barrel
   m_TagString: Untagged
@@ -484,20 +495,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!136 &1055720673709390485
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7049218800127042859}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
 --- !u!1 &7882439183813118009
 GameObject:
   m_ObjectHideFlags: 0
