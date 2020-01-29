@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Health : MonoBehaviour
+public class Health : Bolt.EntityBehaviour<ICustomCubeState>
 {
     [SerializeField]
     private int maxHealth = 100;
 
-    private int currentHealth;
+    private float currentHealth;
 
     public event System.Action<float> OnHealthPctChanged = delegate { };
 
@@ -18,17 +18,41 @@ public class Health : MonoBehaviour
 
     public void ModifyHealth(int amount)
     {
-        currentHealth += amount;
-
-        float currentHealthPct = (float)currentHealth / (float)maxHealth;
-        OnHealthPctChanged(currentHealthPct);
+        state.Health += amount;
     }
 
     private void Update()
     {
-        if (Input.GetKey(KeyCode.H))
+        if (entity.IsOwner)
         {
-            ModifyHealth(-10);
+            if (Input.GetKey(KeyCode.H))
+            {
+                ModifyHealth(-1);
+            }
+
+            if (Input.GetKey(KeyCode.J))
+            {
+                ModifyHealth(1);
+            }
         }
     }
+
+   public override void Attached()
+   {
+       state.Health = currentHealth;
+       state.AddCallback("Health", HealthCallback);
+   }
+
+   private void HealthCallback()
+   {
+       currentHealth = state.Health;
+       float currentHealthPct = (float)currentHealth / (float)maxHealth;
+       OnHealthPctChanged(currentHealthPct);
+       
+       if (currentHealth <= 0)
+       {
+            BoltNetwork.Destroy(gameObject);
+       }
+   }
+
 }

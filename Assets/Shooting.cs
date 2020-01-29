@@ -12,7 +12,7 @@ public class Shooting : Bolt.EntityBehaviour<ICustomCubeState>
 
     public override void Attached() {
         state.OnShoot = Shoot;
-        if (entity.IsOwner) state.Health = 100.0F;
+        //if (entity.IsOwner) state.Health = 100.0F;
     }
 
     public void OnCollisionEnter(Collision collision) {
@@ -25,7 +25,7 @@ public class Shooting : Bolt.EntityBehaviour<ICustomCubeState>
         if (entity.IsOwner) {
             Debug.Log((collision.gameObject.GetComponent<Rigidbody>()).ToString());
             if (collision.gameObject.GetComponent<Rigidbody>() != lastShot) {
-                state.Health -= 1F;
+                //state.Health -= 1F;
                 Debug.Log("Hit! " + this.GetInstanceID() + " was hit.");
             }
             
@@ -36,7 +36,6 @@ public class Shooting : Bolt.EntityBehaviour<ICustomCubeState>
     {
         Rigidbody bulletClone = Instantiate(bulletPrefab, muzzle.transform.position, this.transform.rotation);
         this.lastShot = bulletClone;
-        if (entity.IsOwner) state.Health -= 1F;
         bulletClone.velocity = transform.TransformDirection(new Vector3(0,0, bulletSpeed));
     }
 
