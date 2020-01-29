@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - image_target
+  - ShootButton
   layers:
   - Default
   - TransparentFX

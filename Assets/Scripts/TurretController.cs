@@ -7,7 +7,7 @@ public class TurretController : Bolt.EntityBehaviour<ICustomCubeState>
 
     // Update is called once per frame
     void Update()
-    {
+    { 
         // Ensure turret's y-rotation follows the camera's
         Vector3 forward = Camera.main.transform.forward;
         Vector3 n = new Vector3(0, 1, 0);

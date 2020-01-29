@@ -1,15 +1,15 @@
 {
-    "scopedRegistries": [
-        {
-            "name": "Vuforia",
-            "url": "https://registry.packages.developer.vuforia.com/",
-            "scopes": [
-                "com.ptc.vuforia"
-            ]
-        }
-    ],
-    "dependencies": {
-    "com.ptc.vuforia.engine":"8.6.7",
+  "scopedRegistries": [
+    {
+      "name": "Vuforia",
+      "url": "https://registry.packages.developer.vuforia.com/",
+      "scopes": [
+        "com.ptc.vuforia"
+      ]
+    }
+  ],
+  "dependencies": {
+    "com.ptc.vuforia.engine": "8.6.7",
     "com.unity.collab-proxy": "1.2.16",
     "com.unity.ext.nunit": "1.0.0",
     "com.unity.ide.rider": "1.1.0",
