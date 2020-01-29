@@ -16,7 +16,12 @@ public class Health : Bolt.EntityBehaviour<ICustomCubeState>
         currentHealth = maxHealth;
     }
 
-    public void ModifyHealth(int amount)
+    private void Awake()
+    {
+        GetComponentInParent<HitDetection>().OnPlayerHit += ModifyHealth;
+    }
+
+    public void ModifyHealth(float amount)
     {
         state.Health += amount;
     }
