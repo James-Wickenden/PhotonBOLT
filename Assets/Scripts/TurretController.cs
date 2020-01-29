@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TurretController : MonoBehaviour
+public class TurretController : Bolt.EntityBehaviour<ICustomCubeState>
 {
 
     // Update is called once per frame
@@ -16,7 +16,7 @@ public class TurretController : MonoBehaviour
 
         float denominator = Vector3.Dot(forward, n);
 
-        if (!denominator.Equals(0))
+        if (!denominator.Equals(0) && entity.IsOwner)
         {
             float d = (Vector3.Dot((p_0 - l_0), n)) / denominator;
             Vector3 p = l_0 + forward * d;
