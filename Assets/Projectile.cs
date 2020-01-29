@@ -18,4 +18,9 @@ public class Projectile : Bolt.EntityBehaviour<ICustomCubeState>
     {
         return sourceID;
     }
+
+    public void OnCollisionEnter(Collision collision)
+    {
+        Destroy(this.gameObject);
+    }
 }
