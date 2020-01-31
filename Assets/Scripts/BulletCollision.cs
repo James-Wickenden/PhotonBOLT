@@ -10,10 +10,10 @@ public class BulletCollision : MonoBehaviour
         foreach (ContactPoint contact in collision.contacts)
         {
             Debug.DrawRay(contact.point, contact.normal, Color.white);
-            Debug.Log("Contact");
+            //Debug.Log("Contact");
         }
-        Debug.Log("Hit!");
-        Destroy(gameObject);
+        //Debug.Log("Hit!");
+        //Destroy(gameObject);
 
     }
 }

@@ -14,21 +14,27 @@ public class PlayerMovement : Bolt.EntityBehaviour<ICustomCubeState>
 
     public override void SimulateOwner()
     {
-        float moveDirection = 0;
-        var rotationDirection = Vector3.zero;
+        // Get joystick
+        Joystick joystick = GameObject.FindGameObjectWithTag("joystick").GetComponent<Joystick>();
 
-        moveDirection = System.Math.Sign(Input.GetAxis("Vertical"));
-        rotationDirection = new Vector3(0.0f, Input.GetAxis("Horizontal"), 0.0f);
+        transform.position += joystick.Vertical * transform.forward * movementSpeed * BoltNetwork.FrameDeltaTime;
+        transform.Rotate(new Vector3(0, joystick.Horizontal * rotationSpeed * BoltNetwork.FrameDeltaTime, 0));
 
-        if (moveDirection != 0)
-        {
-            transform.position += moveDirection * transform.forward * movementSpeed * BoltNetwork.FrameDeltaTime;
-        }
+        //float moveDirection = 0;
+        //var rotationDirection = Vector3.zero;
 
-        if (rotationDirection != Vector3.zero)
-        {
-            transform.Rotate(rotationDirection.normalized * rotationSpeed * BoltNetwork.FrameDeltaTime);
-        }
+        //moveDirection = System.Math.Sign(Input.GetAxis("Vertical"));
+        //rotationDirection = new Vector3(0.0f, Input.GetAxis("Horizontal"), 0.0f);
+
+        //if (moveDirection != 0)
+        //{
+        //    transform.position += moveDirection * transform.forward * movementSpeed * BoltNetwork.FrameDeltaTime;
+        //}
+
+        //if (rotationDirection != Vector3.zero)
+        //{
+        //    transform.Rotate(rotationDirection.normalized * rotationSpeed * BoltNetwork.FrameDeltaTime);
+        //}
 
         if (Input.GetKey(KeyCode.Return) && entity.IsOwner)
         {

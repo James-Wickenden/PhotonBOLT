@@ -1,12 +1,15 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Shooting : Bolt.EntityBehaviour<ICustomCubeState>
 {
     public Rigidbody bulletPrefab;
     public float bulletSpeed;
     public GameObject muzzle;
+    private bool toShoot = false;
 
     public override void Attached()
     {
@@ -15,20 +18,19 @@ public class Shooting : Bolt.EntityBehaviour<ICustomCubeState>
 
     private void Awake()
     {
-        transform.parent = GameObject.FindWithTag("image_target").transform;
+        Button shootButton = GameObject.FindGameObjectWithTag("ShootButton").GetComponent<Button>();
+        shootButton.onClick.AddListener(() => OnShootButtonClick());
     }
 
     private void Shoot()
-    {
-
+    { 
         Rigidbody bulletClone = Instantiate(bulletPrefab, muzzle.transform.position, this.transform.rotation);
-
-        bulletClone.velocity = transform.TransformDirection(new Vector3(0,0, bulletSpeed));
+        bulletClone.velocity = muzzle.transform.forward * bulletSpeed;
     }
 
-    private void Update()
+    private void OnShootButtonClick()
     {
-        if (Input.GetAxis("Fire1") > 0 && entity.IsOwner)
+        if (entity.IsOwner)
         {
             state.Shoot();
         }

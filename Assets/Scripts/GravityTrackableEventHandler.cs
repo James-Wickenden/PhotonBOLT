@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class GravityTrackableEventHandler : DefaultTrackableEventHandler
 {
-
+    public bool isTracked;
     private Dictionary<Rigidbody, Vector3> lastVelocities;  // Stores the most recent velocity for each RigidBody before the image target is lost
 
     protected override void OnTrackingFound()
@@ -28,6 +28,8 @@ public class GravityTrackableEventHandler : DefaultTrackableEventHandler
             rbPair.Key.useGravity = true;
             rbPair.Key.velocity = rbPair.Value;
         }
+
+        isTracked = true;
     }
 
     protected override void OnTrackingLost()
@@ -41,5 +43,7 @@ public class GravityTrackableEventHandler : DefaultTrackableEventHandler
             rbPair.Key.useGravity = false;
             rbPair.Key.velocity = new Vector3(0, 0, 0);
         }
+
+        isTracked = false;
     }
 }

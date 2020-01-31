@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 2499986724734846044}
   - component: {fileID: 3790250894500824596}
   - component: {fileID: 3699365417203929636}
+  - component: {fileID: 2321085194158901575}
   m_Layer: 0
   m_Name: tank
   m_TagString: Untagged
@@ -78,8 +79,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25ced87ce3fdd604897cf1587a349535, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 5
-  rotationSpeed: 180
+  movementSpeed: 3
+  rotationSpeed: 150
 --- !u!114 &2499986724734846044
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -125,6 +126,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 3
+--- !u!114 &2321085194158901575
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7627626088620761135}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b04c328b6e89af4478216ca286fd8fbe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &804061348588213369
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -266,6 +279,31 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: tank_turret
+      objectReference: {fileID: 0}
+    - target: {fileID: 4662316544011435535, guid: 080e86edcd193ad43beb65789768f3b0,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4662316544011435535, guid: 080e86edcd193ad43beb65789768f3b0,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4662316544011435535, guid: 080e86edcd193ad43beb65789768f3b0,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4662316544011435535, guid: 080e86edcd193ad43beb65789768f3b0,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4662316544011435535, guid: 080e86edcd193ad43beb65789768f3b0,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 080e86edcd193ad43beb65789768f3b0, type: 3}

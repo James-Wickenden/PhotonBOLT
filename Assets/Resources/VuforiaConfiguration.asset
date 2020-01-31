@@ -21,8 +21,9 @@ MonoBehaviour:
     maxSimultaneousObjectTargets: 1
     useDelayedLoadingObjectTargets: 0
     modelTargetRecoWhileExtendedTracked: 1
-    version: 8.5.9
-    eulaAcceptedVersions: '{"Values":["8.5"]}'
+    version: 8.6.7
+    eulaAcceptedVersions: '{"Values":["8.5","8.6"]}'
+    modelTargetMode: 0
   database:
     disableModelExtraction: 1
   videoBackground:
