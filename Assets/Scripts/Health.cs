@@ -20,7 +20,7 @@ public class Health : MonoBehaviour
     {
         currentHealth += amount;
 
-        float currentHealthPct = (float) currentHealth / (float) maxHealth
+        float currentHealthPct = (float)currentHealth / (float)maxHealth;
         OnHealthPctChanged(currentHealthPct);
     }
 

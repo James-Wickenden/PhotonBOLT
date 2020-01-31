@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 153741015882470103}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 1, z: 4}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -40,7 +40,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 153741015882470103}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: -3796887150266652070, guid: a32e4499c0fe80647b800de59c82861a, type: 3}
 --- !u!23 &7258986639480781550
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -58,7 +58,23 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 3660555636622520049, guid: a32e4499c0fe80647b800de59c82861a, type: 3}
+  - {fileID: -6141345950209148866, guid: a32e4499c0fe80647b800de59c82861a, type: 3}
+  - {fileID: 6271573414225017425, guid: a32e4499c0fe80647b800de59c82861a, type: 3}
+  - {fileID: 1533870381147600872, guid: a32e4499c0fe80647b800de59c82861a, type: 3}
+  - {fileID: -5717186872984881799, guid: a32e4499c0fe80647b800de59c82861a, type: 3}
+  - {fileID: 1792618998618624499, guid: a32e4499c0fe80647b800de59c82861a, type: 3}
+  - {fileID: 3104979335800067105, guid: a32e4499c0fe80647b800de59c82861a, type: 3}
+  - {fileID: 6034957751646507721, guid: a32e4499c0fe80647b800de59c82861a, type: 3}
+  - {fileID: 8690601920051523657, guid: a32e4499c0fe80647b800de59c82861a, type: 3}
+  - {fileID: 3321742362513487934, guid: a32e4499c0fe80647b800de59c82861a, type: 3}
+  - {fileID: 2801109395068789328, guid: a32e4499c0fe80647b800de59c82861a, type: 3}
+  - {fileID: -5254255415061380140, guid: a32e4499c0fe80647b800de59c82861a, type: 3}
+  - {fileID: 8491169168506304478, guid: a32e4499c0fe80647b800de59c82861a, type: 3}
+  - {fileID: 8734104367581842148, guid: a32e4499c0fe80647b800de59c82861a, type: 3}
+  - {fileID: -4340200271497323869, guid: a32e4499c0fe80647b800de59c82861a, type: 3}
+  - {fileID: 8368722655750445499, guid: a32e4499c0fe80647b800de59c82861a, type: 3}
+  - {fileID: 8748892135801146194, guid: a32e4499c0fe80647b800de59c82861a, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -90,5 +106,5 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.2130559, y: 0.06674376, z: 0.32202113}
+  m_Center: {x: -0.005371946, y: -0.0080576865, z: 0.0073842774}
