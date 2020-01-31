@@ -19,7 +19,7 @@ MonoBehaviour:
     maxEntityPriority: 65536
     maxPropertyPriority: 2048
     scopeMode: 0
-    logTargets: 3
+    logTargets: 1
     disableDejitterBuffer: 0
     clientSendRate: 3
     clientDejitterDelay: 6
@@ -48,7 +48,7 @@ MonoBehaviour:
   debugStartPort: 50538
   debugStartMapName: PhotonGame
   debugPlayAsServer: 0
-  showDebugInfo: 1
+  showDebugInfo: 0
   overrideTimeScale: 1
   logUncaughtExceptions: 0
   debugEditorMode: 1
@@ -57,7 +57,7 @@ MonoBehaviour:
   compilationWarnLevel: 4
   editorSkin: 4
   scopeModeHideWarningInGui: 0
-  showHelpButtons: 1
+  showHelpButtons: 0
   masterServerGameId: 09A20926-601A-4EF4-BFEE-374761B0D2A5
   showBoltEntityHints: 0
   serializeProjectAsText: 0
