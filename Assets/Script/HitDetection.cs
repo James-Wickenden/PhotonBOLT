@@ -9,7 +9,6 @@ public class HitDetection : Bolt.EntityBehaviour<ICustomCubeState>
     public void OnCollisionEnter(Collision collision)
     {
 
-
         //Debug.Log("Hit!");
         if (entity.IsOwner)
         {
