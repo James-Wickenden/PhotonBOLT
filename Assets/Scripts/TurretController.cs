@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class TurretController : Bolt.EntityBehaviour<ICustomCubeState>
 {
+    public override void Attached()
+    {
+        state.SetTransforms(state.TurretTransform, gameObject.transform);
+    }
 
     // Update is called once per frame
     void Update()
