@@ -9,7 +9,6 @@ public class Shooting : Bolt.EntityBehaviour<ICustomCubeState>
     public Rigidbody bulletPrefab;
     public float bulletSpeed;
     public GameObject muzzle;
-    private bool toShoot = false;
 
     public override void Attached()
     {
