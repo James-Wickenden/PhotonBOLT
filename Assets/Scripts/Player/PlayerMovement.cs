@@ -21,7 +21,7 @@ public class PlayerMovement : Bolt.EntityBehaviour<ICustomCubeState>
         // ROTATION
 
         Vector3 originalPos = new Vector3(transform.forward.x, 0, transform.forward.z);
-        Vector3 targetPos = new Vector3(joystick.Horizontal, 0, joystick.Vertical);
+        Vector3 targetPos = Camera.main.transform.TransformDirection(new Vector3(joystick.Horizontal, 0, joystick.Vertical));
         targetPos.Normalize();
         Vector3 dirVec = targetPos - originalPos;
         dirVec = transform.InverseTransformDirection(dirVec);
@@ -29,7 +29,6 @@ public class PlayerMovement : Bolt.EntityBehaviour<ICustomCubeState>
 
 
         if (dirVec.x >= 0) transform.localEulerAngles += new Vector3(0, angle * rotationSpeed * BoltNetwork.FrameDeltaTime, 0);
-
         else transform.localEulerAngles -= new Vector3(0, angle * rotationSpeed * BoltNetwork.FrameDeltaTime, 0);
 
 
@@ -38,22 +37,8 @@ public class PlayerMovement : Bolt.EntityBehaviour<ICustomCubeState>
         float joystickMagnitude = joystick.Horizontal * joystick.Horizontal + joystick.Vertical * joystick.Vertical;
         transform.position += transform.forward * movementSpeed * joystickMagnitude * BoltNetwork.FrameDeltaTime;
 
-        //float moveDirection = 0;
-        //var rotationDirection = Vector3.zero;
 
-        //moveDirection = System.Math.Sign(Input.GetAxis("Vertical"));
-        //rotationDirection = new Vector3(0.0f, Input.GetAxis("Horizontal"), 0.0f);
-
-        //if (moveDirection != 0)
-        //{
-        //    transform.position += moveDirection * transform.forward * movementSpeed * BoltNetwork.FrameDeltaTime;
-        //}
-
-        //if (rotationDirection != Vector3.zero)
-        //{
-        //    transform.Rotate(rotationDirection.normalized * rotationSpeed * BoltNetwork.FrameDeltaTime);
-        //}
-
+        // respawning
         if (Input.GetKey(KeyCode.Return) && entity.IsOwner)
         {
             transform.position = new Vector3(Random.Range(-5, 5), 1, Random.Range(-5, 5));

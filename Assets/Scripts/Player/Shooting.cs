@@ -24,7 +24,12 @@ public class Shooting : Bolt.EntityBehaviour<ICustomCubeState>
     private void Shoot()
     { 
         Rigidbody bulletClone = Instantiate(bulletPrefab, muzzle.transform.position, this.transform.rotation);
-        bulletClone.velocity = muzzle.transform.forward * bulletSpeed;
+        
+
+        Projectile projectile = bulletClone.GetComponent<Projectile>();
+        projectile.setSourceID(GetInstanceID());
+
+        bulletClone.velocity = muzzle.transform.forward * projectile.getSpeed();
     }
 
     private void OnShootButtonClick()
