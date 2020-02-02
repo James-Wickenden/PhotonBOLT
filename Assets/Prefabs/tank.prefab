@@ -57,7 +57,7 @@ MonoBehaviour:
   _autoFreezeProxyFrames: 0
   _clientPredicted: 1
   _allowInstantiateOnClient: 1
-  _persistThroughSceneLoads: 0
+  _persistThroughSceneLoads: 1
   _sceneObjectDestroyOnDetach: 1
   _sceneObjectAutoAttach: 1
   _alwaysProxy: 0
@@ -80,7 +80,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementSpeed: 3
-  rotationSpeed: 150
+  rotationSpeed: 1.5
 --- !u!114 &2499986724734846044
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -17,8 +17,26 @@ public class PlayerMovement : Bolt.EntityBehaviour<ICustomCubeState>
         // Get joystick
         Joystick joystick = GameObject.FindGameObjectWithTag("joystick").GetComponent<Joystick>();
 
-        transform.position += joystick.Vertical * transform.forward * movementSpeed * BoltNetwork.FrameDeltaTime;
-        transform.Rotate(new Vector3(0, joystick.Horizontal * rotationSpeed * BoltNetwork.FrameDeltaTime, 0));
+
+        // ROTATION
+
+        Vector3 originalPos = new Vector3(transform.forward.x, 0, transform.forward.z);
+        Vector3 targetPos = new Vector3(joystick.Horizontal, 0, joystick.Vertical);
+        targetPos.Normalize();
+        Vector3 dirVec = targetPos - originalPos;
+        dirVec = transform.InverseTransformDirection(dirVec);
+        float angle = Vector3.Angle(originalPos, targetPos);
+
+
+        if (dirVec.x >= 0) transform.localEulerAngles += new Vector3(0, angle * rotationSpeed * BoltNetwork.FrameDeltaTime, 0);
+
+        else transform.localEulerAngles -= new Vector3(0, angle * rotationSpeed * BoltNetwork.FrameDeltaTime, 0);
+
+
+        // POSITION
+
+        float joystickMagnitude = joystick.Horizontal * joystick.Horizontal + joystick.Vertical * joystick.Vertical;
+        transform.position += transform.forward * movementSpeed * joystickMagnitude * BoltNetwork.FrameDeltaTime;
 
         //float moveDirection = 0;
         //var rotationDirection = Vector3.zero;
@@ -38,7 +56,7 @@ public class PlayerMovement : Bolt.EntityBehaviour<ICustomCubeState>
 
         if (Input.GetKey(KeyCode.Return) && entity.IsOwner)
         {
-            transform.position = new Vector3(Random.Range(-8, 8), 1, Random.Range(-8, 8));
+            transform.position = new Vector3(Random.Range(-5, 5), 1, Random.Range(-5, 5));
             transform.rotation = Quaternion.identity;
         }
     }
