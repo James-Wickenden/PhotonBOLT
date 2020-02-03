@@ -2516,7 +2516,7 @@
       ],
       "EntitySenders": 1,
       "GlobalSenders": 3,
-      "Name": "FlashColorEvent",
+      "Name": "DamageTakenEvent",
       "Guid": "c4181506-e273-4806-a7af-46db91ce6f59",
       "Groups": [
         "samples"

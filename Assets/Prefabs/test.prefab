@@ -112,7 +112,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _sceneGuid: 
   _serializerGuid: 5415172f-4903-4b59-911e-ea037a07f041
-  _prefabId: 3
+  _prefabId: 4
   _updateRate: 1
   _autoFreezeProxyFrames: 0
   _clientPredicted: 1
@@ -183,8 +183,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25ced87ce3fdd604897cf1587a349535, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 5
-  rotationSpeed: 180
+  movementSpeed: 0
+  rotationSpeed: 0
 --- !u!1 &6901474695447587538
 GameObject:
   m_ObjectHideFlags: 0
