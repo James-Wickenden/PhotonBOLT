@@ -20,8 +20,8 @@ public class HealthBarController : MonoBehaviour
         if (!healthBars.ContainsKey(health))
         {
             var healthBar = Instantiate(healthBarPrefab, transform);
-            healthBars.Add(health, healthBar);
             healthBar.SetHealth(health);
+            healthBars.Add(health, healthBar);
         }
     }
 

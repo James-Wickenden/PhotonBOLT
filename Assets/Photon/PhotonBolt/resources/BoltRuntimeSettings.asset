@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _config:
     framesPerSecond: 60
-    packetSize: 1200
+    packetSize: 1280
     packetMaxEventSize: 512
     maxEntityPriority: 65536
     maxPropertyPriority: 2048
     scopeMode: 0
-    logTargets: 3
+    logTargets: 0
     disableDejitterBuffer: 0
     clientSendRate: 3
     clientDejitterDelay: 6
@@ -29,15 +29,15 @@ MonoBehaviour:
     serverDejitterDelay: 6
     serverDejitterDelayMin: 3
     serverDejitterDelayMax: 9
-    serverConnectionLimit: 32
+    serverConnectionLimit: 64
     serverConnectionAcceptMode: 0
     commandQueueSize: 60
     commandRedundancy: 6
     commandPingMultiplier: 1.25
-    useNetworkSimulation: 0
-    simulatedLoss: 0.02
-    simulatedPingMean: 200
-    simulatedPingJitter: 10
+    useNetworkSimulation: 1
+    simulatedLoss: 0
+    simulatedPingMean: 0
+    simulatedPingJitter: 0
     simulatedRandomFunction: 0
     connectionTimeout: 10000
     connectionRequestTimeout: 500
@@ -48,7 +48,7 @@ MonoBehaviour:
   debugStartPort: 50538
   debugStartMapName: PhotonGame
   debugPlayAsServer: 0
-  showDebugInfo: 1
+  showDebugInfo: 0
   overrideTimeScale: 1
   logUncaughtExceptions: 0
   debugEditorMode: 1
@@ -57,7 +57,7 @@ MonoBehaviour:
   compilationWarnLevel: 4
   editorSkin: 4
   scopeModeHideWarningInGui: 0
-  showHelpButtons: 1
+  showHelpButtons: 0
   masterServerGameId: 09A20926-601A-4EF4-BFEE-374761B0D2A5
   showBoltEntityHints: 0
   serializeProjectAsText: 0
