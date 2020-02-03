@@ -27,6 +27,7 @@ public class PlayerMovement : Bolt.EntityBehaviour<ICustomCubeState>
         // ROTATION
         Vector3 originalPos = new Vector3(transform.forward.x, 0, transform.forward.z);
         Vector3 targetPos = Camera.main.transform.TransformDirection(new Vector3(joystick.Horizontal, 0, joystick.Vertical));
+        targetPos.y = 0; // project targetPos onto X-Z plane
 
         float dir = Mathf.Sign(Vector3.Dot(targetPos, originalPos)); //Enables reversing if direction angle is closer to rear of tank.
         targetPos *= dir; 
