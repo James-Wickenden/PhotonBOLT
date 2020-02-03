@@ -6,16 +6,17 @@ public class MenuLight_Transform : MonoBehaviour
 {
     private new Light light;
     bool increasingIntensity = true;
-
+    
     void Start()
     {
         light = GetComponent<Light>();
-        light.color = Color.green;
+        light.color = Color.yellow;
     }
 
     void Update()
     {
-       if (increasingIntensity)
+
+        if (increasingIntensity)
         {
             if (light.intensity > 2.0F) increasingIntensity = false;
             light.intensity += 0.003F;
