@@ -19,6 +19,8 @@ public class Health : Bolt.EntityEventListener<ICustomCubeState>
 
     Color originalColor;
 
+    List<string> logMessages = new List<string>();
+
     private void OnEnable()
     {
         currentHealth = maxHealth;
@@ -33,6 +35,11 @@ public class Health : Bolt.EntityEventListener<ICustomCubeState>
     public void ModifyHealth(float amount)
     {
         state.Health += amount;
+
+        if (state.Health <= 0 ) {
+            var death = DeathEvent.Create(entity);
+            death.Send();
+        }
 
         if (amount < 0) {
             var flash = DamageTakenEvent.Create(entity);
@@ -92,5 +99,24 @@ public class Health : Bolt.EntityEventListener<ICustomCubeState>
         resetColorTime = Time.time + 0.2f;
         foreach (Renderer r in renderers) r.material.color = evnt.FlashColor;
     }
+
+    public override void OnEvent(DeathEvent evnt) {
+        logMessages.Insert(0, "You died!");
+    }
+
+    void OnGUI()
+{
+    // only display max the 5 latest log messages
+    int maxMessages = Mathf.Min(5, logMessages.Count);
+
+    GUILayout.BeginArea(new Rect(Screen.width / 2 - 200, Screen.height - 100, 400, 100), GUI.skin.box);
+
+    for (int i = 0; i < maxMessages; ++i)
+    {
+        GUILayout.Label(logMessages[i]);
+    }
+
+    GUILayout.EndArea();
+}
 
 }
