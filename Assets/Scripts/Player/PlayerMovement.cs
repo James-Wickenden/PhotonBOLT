@@ -20,9 +20,10 @@ public class PlayerMovement : Bolt.EntityBehaviour<ICustomCubeState>
 
         // ROTATION
 
-        Vector3 originalPos = new Vector3(transform.forward.x, 0, transform.forward.z);
-        Vector3 targetPos = Camera.main.transform.TransformDirection(new Vector3(joystick.Horizontal, 0, joystick.Vertical));
-        targetPos.Normalize();
+        Vector3 originalPos = new Vector3(transform.forward.x, 0, transform.forward.z); // current position of tank
+        Vector3 targetPos = Camera.main.transform.TransformDirection(new Vector3(joystick.Horizontal, 0, joystick.Vertical)); // position of joystick, relative to camera
+        targetPos.y = 0; // project targetPos onto X-Z plane
+        targetPos.Normalize(); 
         Vector3 dirVec = targetPos - originalPos;
         dirVec = transform.InverseTransformDirection(dirVec);
         float angle = Vector3.Angle(originalPos, targetPos);
