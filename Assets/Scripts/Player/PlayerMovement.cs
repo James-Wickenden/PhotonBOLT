@@ -4,7 +4,10 @@ using UnityEngine;
 public class PlayerMovement : Bolt.EntityBehaviour<ICustomCubeState>
 {
     [SerializeField]
-    private float movementSpeed;
+    private float forwardSpeed;
+
+    [SerializeField]
+    private float reverseSpeed;
 
     [SerializeField]
     private float rotationSpeed;
@@ -42,7 +45,11 @@ public class PlayerMovement : Bolt.EntityBehaviour<ICustomCubeState>
 
         // POSITION
         float joystickMagnitude = joystick.Horizontal * joystick.Horizontal + joystick.Vertical * joystick.Vertical;
-        transform.position += dir * transform.forward * movementSpeed * joystickMagnitude * BoltNetwork.FrameDeltaTime;
+        Vector3 velocity = dir * transform.forward * joystickMagnitude * BoltNetwork.FrameDeltaTime;
+        if (dir > 0) velocity *= forwardSpeed;
+        else velocity *= reverseSpeed;
+
+        transform.position += velocity;
 
         // respawning
         if (Input.GetKey(KeyCode.Return) && entity.IsOwner)

@@ -13,7 +13,6 @@ public class HitDetection : Bolt.EntityBehaviour<ICustomCubeState>
         {
             //1. Determine if collision.gameObject is a bullet
             //2. Get the source of the bullet
-            //3. If source != this, take damage
             Debug.Log(collision.gameObject.GetComponent<Projectile>());
             Projectile projectile = collision.gameObject.GetComponent<Projectile>();
 
