@@ -30,6 +30,7 @@ public class Shooting : Bolt.EntityBehaviour<ICustomCubeState>
         projectile.setSourceID(GetInstanceID());
 
         bulletClone.velocity = muzzle.transform.forward * projectile.getSpeed();
+        bulletClone.transform.rotation = muzzle.transform.rotation;
     }
 
     private void OnShootButtonClick()
