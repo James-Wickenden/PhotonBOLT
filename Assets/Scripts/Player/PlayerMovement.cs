@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
+[RequireComponent(typeof(Rigidbody))]
 public class PlayerMovement : Bolt.EntityBehaviour<ICustomCubeState>
 {
     [SerializeField]
@@ -14,10 +16,13 @@ public class PlayerMovement : Bolt.EntityBehaviour<ICustomCubeState>
 
     private Joystick joystick;
 
+    private Rigidbody rb;
+
     public void Awake()
     {
         // Get joystick
         joystick = GameObject.FindGameObjectWithTag("joystick").GetComponent<Joystick>();
+        rb = GetComponent<Rigidbody>();
     }
 
     public override void Attached()
@@ -49,7 +54,9 @@ public class PlayerMovement : Bolt.EntityBehaviour<ICustomCubeState>
         if (dir > 0) velocity *= forwardSpeed;
         else velocity *= reverseSpeed;
 
-        transform.position += velocity;
+        //transform.position += velocity;
+        rb.AddForce(velocity * 10.0f, ForceMode.VelocityChange);
+        
 
         // respawning
         if (Input.GetKey(KeyCode.Return) && entity.IsOwner)
