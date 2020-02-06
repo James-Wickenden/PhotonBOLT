@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Health : Bolt.EntityEventListener<ICustomCubeState>
+public class Health : Bolt.EntityBehaviour<ICustomCubeState>
 {
     [SerializeField]
     private int maxHealth = 100;
@@ -11,15 +11,12 @@ public class Health : Bolt.EntityEventListener<ICustomCubeState>
 
     public event System.Action<float> OnHealthPctChanged = delegate { };
 
+    public event System.Action OnHealthLost = delegate { };
+    public event System.Action OnHealthGained = delegate { };
+
     public static event System.Action<Health> OnHealthAdded = delegate { };
     public static event System.Action<Health> OnHealthRemoved = delegate { };
 
-    float resetColorTime;
-    Renderer[] renderers;
-
-    Color originalColor;
-
-    List<string> logMessages = new List<string>();
 
     private void OnEnable()
     {
@@ -35,19 +32,11 @@ public class Health : Bolt.EntityEventListener<ICustomCubeState>
     public void ModifyHealth(float amount)
     {
         state.Health += amount;
-
-        if (state.Health <= 0 ) {
-            var death = DeathEvent.Create(entity);
-            death.Send();
-        }
-
-        if (amount < 0) {
-            var flash = DamageTakenEvent.Create(entity);
-            flash.FlashColor = Color.red;
-            flash.Send();
-        }
+        if (amount > 0) OnHealthGained();
+        else OnHealthLost();
     }
 
+    //TODO: remove. This is for testing.
     private void Update()
     {
         if (entity.IsOwner)
@@ -61,11 +50,6 @@ public class Health : Bolt.EntityEventListener<ICustomCubeState>
             {
                 ModifyHealth(1);
             }
-
-            if (resetColorTime < Time.time)
-            {
-                foreach (Renderer r in renderers) r.material.color = originalColor;
-            }
         }
     }
 
@@ -73,9 +57,6 @@ public class Health : Bolt.EntityEventListener<ICustomCubeState>
    {
        state.Health = currentHealth;
        state.AddCallback("Health", HealthCallback);
-       renderers = GetComponentsInChildren<Renderer>();
-       foreach (Renderer r in renderers) r.material.color = Color.white;
-       originalColor = Color.white;
    }
 
    private void HealthCallback()
@@ -94,29 +75,5 @@ public class Health : Bolt.EntityEventListener<ICustomCubeState>
     {
         OnHealthRemoved(this);
     }
-
-    public override void OnEvent(DamageTakenEvent evnt) {
-        resetColorTime = Time.time + 0.2f;
-        foreach (Renderer r in renderers) r.material.color = evnt.FlashColor;
-    }
-
-    public override void OnEvent(DeathEvent evnt) {
-        logMessages.Insert(0, "You died!");
-    }
-
-    void OnGUI()
-{
-    // only display max the 5 latest log messages
-    int maxMessages = Mathf.Min(5, logMessages.Count);
-
-    GUILayout.BeginArea(new Rect(Screen.width / 2 - 200, Screen.height - 100, 400, 100), GUI.skin.box);
-
-    for (int i = 0; i < maxMessages; ++i)
-    {
-        GUILayout.Label(logMessages[i]);
-    }
-
-    GUILayout.EndArea();
-}
 
 }

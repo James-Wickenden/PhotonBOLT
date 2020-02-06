@@ -10,9 +10,27 @@ public class Shooting : Bolt.EntityBehaviour<ICustomCubeState>
     public float bulletSpeed;
     public GameObject muzzle;
 
+    private float resetMuzzleFlashTime;
+
+    [SerializeField]
+    private float muzzleFlashDuration = 0.01f;
+
+    [SerializeField]
+    private float muzzleFlashIntensity = 0.5f;
+
+    private Light muzzleFlash;
+
+    private bool animStart = false;
+    private float startTime;
+
+
     public override void Attached()
     {
         state.OnShoot = Shoot;
+
+        muzzleFlash = muzzle.AddComponent<Light>();
+        muzzleFlash.color = Color.yellow;
+        muzzleFlash.intensity = 0.0f;
     }
 
     private void Awake()
@@ -30,6 +48,26 @@ public class Shooting : Bolt.EntityBehaviour<ICustomCubeState>
         projectile.setSourceID(GetInstanceID());
 
         bulletClone.velocity = muzzle.transform.forward * projectile.getSpeed();
+        bulletClone.transform.rotation = muzzle.transform.rotation;
+
+
+        startTime = Time.time;
+        animStart = true;
+    }
+
+    private void Update()
+    {
+        if (animStart)
+        {
+            float phi = (Time.time - startTime) / muzzleFlashDuration * 2 * Mathf.PI;
+            float amplitude = Mathf.Cos(phi) * muzzleFlashIntensity + muzzleFlashIntensity;
+            muzzleFlash.intensity = amplitude;
+            if (amplitude <= muzzleFlashIntensity)
+            {
+                animStart = false;
+                muzzleFlash.intensity = 0.0F;
+            }
+        }
     }
 
     private void OnShootButtonClick()
