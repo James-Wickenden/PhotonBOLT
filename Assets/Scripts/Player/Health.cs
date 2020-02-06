@@ -14,6 +14,8 @@ public class Health : Bolt.EntityBehaviour<ICustomCubeState>
     public event System.Action OnHealthLost = delegate { };
     public event System.Action OnHealthGained = delegate { };
 
+    public event System.Action OnDeath = delegate { };
+
     public static event System.Action<Health> OnHealthAdded = delegate { };
     public static event System.Action<Health> OnHealthRemoved = delegate { };
 
@@ -59,7 +61,7 @@ public class Health : Bolt.EntityBehaviour<ICustomCubeState>
        state.AddCallback("Health", HealthCallback);
    }
 
-   private void HealthCallback()
+   public void HealthCallback()
    {
        currentHealth = state.Health;
        float currentHealthPct = (float)currentHealth / (float)maxHealth;
@@ -67,7 +69,10 @@ public class Health : Bolt.EntityBehaviour<ICustomCubeState>
        
        if (currentHealth <= 0)
        {
-            BoltNetwork.Destroy(gameObject);
+        //    Debug.Log(currentHealth);
+        //    Debug.Log("Death is upon us");
+           OnDeath();
+        //    BoltNetwork.Destroy(gameObject);
        }
    }
 
