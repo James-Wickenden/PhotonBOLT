@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class TurretController : Bolt.EntityBehaviour<ICustomCubeState>
 {
+
+    [SerializeField]
+    private float rotationSpeed;
+
     public override void Attached()
     {
         state.SetTransforms(state.TurretTransform, gameObject.transform);
@@ -23,7 +27,15 @@ public class TurretController : Bolt.EntityBehaviour<ICustomCubeState>
         {
             float d = (Vector3.Dot((p_0 - l_0), n)) / denominator;
             Vector3 p = l_0 + forward * d;
-            transform.LookAt(p);
+
+            // Slowly rotate turret towards p
+            Vector3 originalPos = transform.forward;
+            Vector3 targetPos = p - transform.position;
+
+            float singleStep = rotationSpeed * BoltNetwork.FrameDeltaTime;
+            Vector3 newDirection = Vector3.RotateTowards(originalPos, targetPos, singleStep, 0.0f);
+
+            transform.rotation = Quaternion.LookRotation(newDirection);
         }
 
     }
