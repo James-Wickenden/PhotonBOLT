@@ -8,12 +8,18 @@ public class UIMessagesController : MonoBehaviour
     [SerializeField]
     private DeathMessage deathMessagePrefab;
 
+    public static event System.Action OnRespawn = delegate { };
     private void Awake(){
         Health.OnDeathOccured += DisplayDeathMessage;
+        DeathMessage.OnRespawn  += InitiateRespawn;
     }
     private void DisplayDeathMessage() {
         var deathMessage = Instantiate(deathMessagePrefab, transform);
 
+    }
+
+    private void InitiateRespawn() {
+        OnRespawn();
     }
 
     private void LateUpdate() {

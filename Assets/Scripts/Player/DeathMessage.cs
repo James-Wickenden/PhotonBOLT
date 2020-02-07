@@ -11,25 +11,25 @@ public class DeathMessage : Bolt.EntityEventListener<ICustomCubeState>
     private float remainingRespawnTime;
     Text respawnMessage;
 
+    public static event System.Action OnRespawn = delegate { };
     private void Awake()
     {
-        respawnMessage = GetComponent<Text>();
         remainingRespawnTime = respawnTime;
+        respawnMessage = GetComponent<Text>();
     }
-    private void Update()
+    private void LateUpdate()
     {  
         if (remainingRespawnTime > 0){
             remainingRespawnTime -= Time.deltaTime;
             respawnMessage.text = "Respawning in " + Mathf.Round(remainingRespawnTime).ToString();
 
             if (remainingRespawnTime <= 0){
+                remainingRespawnTime = respawnTime;
                 Debug.Log("Respawn now");
                 gameObject.SetActive(false);
 
-                var respawn = RespawnEvent.Create(entity);
-                respawn.Send();
-                
-                remainingRespawnTime = respawnTime;
+                OnRespawn();
+                Debug.Log("Called on respawn");
             }    
         }
         

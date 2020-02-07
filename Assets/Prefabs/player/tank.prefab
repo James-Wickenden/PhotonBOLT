@@ -77,7 +77,7 @@ MonoBehaviour:
   _sceneObjectDestroyOnDetach: 1
   _sceneObjectAutoAttach: 1
   _alwaysProxy: 0
-  _detachOnDisable: 1
+  _detachOnDisable: 0
   _allowFirstReplicationWhenFrozen: 0
   _autoRemoveChildEntities: 0
   _entityBehaviourQueryOption: 0

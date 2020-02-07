@@ -8,7 +8,6 @@ public class Death : Bolt.EntityEventListener<ICustomCubeState>
 
     public void Awake()
     {
-        renderers = GetComponentsInChildren<Renderer>();
         Debug.Log("Death awake");
         GetComponentInParent<Health>().OnDeath += TriggerDeathEvent;
     }
@@ -22,10 +21,11 @@ public class Death : Bolt.EntityEventListener<ICustomCubeState>
     public override void OnEvent(DeathEvent evnt)
     {
         gameObject.SetActive(false);
+        Debug.Log("Set inactive");
     }
 
-    public override void OnEvent(RespawnEvent evnt){
-        Debug.Log("Respawn!");
-        gameObject.SetActive(true);
+    public void respawn()
+    {
+        // gameObject.SetActive(true);
     }
 }
