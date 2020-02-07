@@ -32,30 +32,55 @@ public class PlayerMovement : Bolt.EntityBehaviour<ICustomCubeState>
 
     public override void SimulateOwner()
     {
-        // ROTATION
+        //Velocity
+        Vector3 velocity = transform.forward * BoltNetwork.FrameDeltaTime;
+
+        //Controller
+        float controllerMagnitude = Input.GetAxis("Vertical");
+        if (controllerMagnitude != 0.0f)
+        {
+            velocity *= controllerMagnitude;
+            if (controllerMagnitude > 0)
+            {
+                velocity *= forwardSpeed;
+            }
+            else
+            {
+                velocity *= reverseSpeed;
+            }
+        }
+        transform.localEulerAngles += new Vector3(0, rotationSpeed * Input.GetAxis("Horizontal"), 0);
+        
+        
+        //TouchScreen
+        //ROTATION:
         Vector3 originalPos = new Vector3(transform.forward.x, 0, transform.forward.z);
         Vector3 targetPos = Camera.main.transform.TransformDirection(new Vector3(joystick.Horizontal, 0, joystick.Vertical));
         targetPos.y = 0; // project targetPos onto X-Z plane
 
         float dir = Mathf.Sign(Vector3.Dot(targetPos, originalPos)); //Enables reversing if direction angle is closer to rear of tank.
-        targetPos *= dir; 
+        targetPos *= dir;
 
         Vector3 dirVec = targetPos - originalPos;
         dirVec = transform.InverseTransformDirection(dirVec);
         float angle = Vector3.Angle(originalPos, targetPos);
 
+        Vector3 deltaAngle = new Vector3(0, angle * rotationSpeed * BoltNetwork.FrameDeltaTime, 0);
+        if (dirVec.x >= 0) transform.localEulerAngles += deltaAngle;
+        else transform.localEulerAngles -= deltaAngle;
         
-        if (dirVec.x >= 0) transform.localEulerAngles += new Vector3(0, angle * rotationSpeed * BoltNetwork.FrameDeltaTime, 0);
-        else transform.localEulerAngles -= new Vector3(0, angle * rotationSpeed * BoltNetwork.FrameDeltaTime, 0);
-
-        // POSITION
+        //VELOCITY:
         float joystickMagnitude = joystick.Horizontal * joystick.Horizontal + joystick.Vertical * joystick.Vertical;
-        Vector3 velocity = dir * transform.forward * joystickMagnitude * BoltNetwork.FrameDeltaTime;
-        if (dir > 0) velocity *= forwardSpeed;
-        else velocity *= reverseSpeed;
+        if (joystickMagnitude > 0)
+        {
+            velocity *= dir * joystickMagnitude;
+            if (dir > 0) velocity *= forwardSpeed;
+            else velocity *= reverseSpeed;
+        }
 
-        //transform.position += velocity;
-        rb.AddForce(velocity * 10.0f, ForceMode.VelocityChange);
+
+        //ADD FORCE
+        rb.AddForce(velocity, ForceMode.VelocityChange);
         
 
         // respawning

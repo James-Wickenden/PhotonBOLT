@@ -68,6 +68,17 @@ public class Shooting : Bolt.EntityBehaviour<ICustomCubeState>
                 muzzleFlash.intensity = 0.0F;
             }
         }
+
+        if (entity.IsOwner)
+        {
+            if (Input.GetKeyDown("joystick button 0") ||
+                Input.GetKeyDown("joystick button 7") ||
+                Input.GetKeyDown("joystick button 9"))
+            {
+                state.Shoot();
+                Debug.Log("SHOOT");
+            }
+        }
     }
 
     private void OnShootButtonClick()
