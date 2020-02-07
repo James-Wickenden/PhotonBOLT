@@ -13,11 +13,11 @@ public class Health : Bolt.EntityBehaviour<ICustomCubeState>
 
     public event System.Action OnHealthLost = delegate { };
     public event System.Action OnHealthGained = delegate { };
-
     public event System.Action OnDeath = delegate { };
 
     public static event System.Action<Health> OnHealthAdded = delegate { };
     public static event System.Action<Health> OnHealthRemoved = delegate { };
+    public static event System.Action OnDeathOccured = delegate { };
 
 
     private void OnEnable()
@@ -69,9 +69,8 @@ public class Health : Bolt.EntityBehaviour<ICustomCubeState>
        
        if (currentHealth <= 0)
        {
-        //    Debug.Log(currentHealth);
-        //    Debug.Log("Death is upon us");
            OnDeath();
+           OnDeathOccured();
         //    BoltNetwork.Destroy(gameObject);
        }
    }

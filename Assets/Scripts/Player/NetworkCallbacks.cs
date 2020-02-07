@@ -5,6 +5,7 @@ using UnityEngine;
 [BoltGlobalBehaviour]
 public class NetworkCallbacks : Bolt.GlobalEventListener
 {
+
     public override void SceneLoadLocalDone(string scene) {
 
         var spawnPosition = new Vector3(Random.Range(-5,5),1,Random.Range(-5,5));
