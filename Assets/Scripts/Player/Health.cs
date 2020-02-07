@@ -13,7 +13,6 @@ public class Health : Bolt.EntityBehaviour<ICustomCubeState>
 
     public event System.Action OnHealthLost = delegate { };
     public event System.Action OnHealthGained = delegate { };
-    public event System.Action OnDeath = delegate { };
 
     public static event System.Action<Health> OnHealthAdded = delegate { };
     public static event System.Action<Health> OnHealthRemoved = delegate { };
@@ -28,7 +27,7 @@ public class Health : Bolt.EntityBehaviour<ICustomCubeState>
 
     private void Awake()
     {
-        GetComponentInParent<HitDetection>().OnPlayerHit += ModifyHealth;
+        GetComponentInParent<HitDetection>().OnPlayerHit += ModifyHealth;   
     }
 
     public void ModifyHealth(float amount)
@@ -69,8 +68,10 @@ public class Health : Bolt.EntityBehaviour<ICustomCubeState>
        
        if (currentHealth <= 0)
        {
-           OnDeath();
-           OnDeathOccured();
+        //    OnDeath();
+        var death = DeathEvent.Create(entity);
+        death.Send();
+        OnDeathOccured();
         //    BoltNetwork.Destroy(gameObject);
        }
    }

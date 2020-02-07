@@ -29,6 +29,7 @@ public class DeathMessage : Bolt.EntityEventListener<ICustomCubeState>
                 gameObject.SetActive(false);
 
                 OnRespawn();
+
                 Debug.Log("Called on respawn");
             }    
         }

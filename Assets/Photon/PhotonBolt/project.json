@@ -3652,6 +3652,7 @@
     {
       "$type": "Bolt.Compiler.EventDefinition, bolt.compiler",
       "Properties": [],
+      "EntitySenders": 1,
       "Name": "RespawnEvent",
       "Guid": "ffc29838-4b70-41de-8926-92e1d3ad03a8",
       "Groups": [
