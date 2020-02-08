@@ -27,7 +27,8 @@ public class Health : Bolt.EntityBehaviour<ICustomCubeState>
 
     private void Awake()
     {
-        GetComponentInParent<HitDetection>().OnPlayerHit += ModifyHealth;   
+        GetComponentInParent<HitDetection>().OnPlayerHit += ModifyHealth;
+        DeathMessage.OnRespawn += resetHealth;   
     }
 
     public void ModifyHealth(float amount)
@@ -35,6 +36,11 @@ public class Health : Bolt.EntityBehaviour<ICustomCubeState>
         state.Health += amount;
         if (amount > 0) OnHealthGained();
         else OnHealthLost();
+    }
+
+    private void resetHealth()
+    {
+        state.Health = maxHealth;
     }
 
     //TODO: remove. This is for testing.
