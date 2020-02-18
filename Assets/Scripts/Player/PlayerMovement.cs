@@ -14,13 +14,24 @@ public class PlayerMovement : Bolt.EntityBehaviour<ICustomCubeState>
 
     private Joystick joystick;
 
-    public void Awake()
+    public void Start()
     {
         // Get joystick
         joystick = GameObject.FindGameObjectWithTag("joystick").GetComponent<Joystick>();
+        DeathMessage.OnRespawn += resetTransforms;
     }
 
+    private void resetTransforms()
+    {
+        state.SetTransforms(state.CubeTransform, gameObject.transform);
+    }
     public override void Attached()
+    {
+        Debug.Log("Player movement attached");
+        state.SetTransforms(state.CubeTransform, gameObject.transform);
+    }
+
+    public void OnEnable()
     {
         state.SetTransforms(state.CubeTransform, gameObject.transform);
     }
@@ -50,7 +61,6 @@ public class PlayerMovement : Bolt.EntityBehaviour<ICustomCubeState>
         else velocity *= reverseSpeed;
 
         transform.position += velocity;
-
         // respawning
         if (Input.GetKey(KeyCode.Return) && entity.IsOwner)
         {

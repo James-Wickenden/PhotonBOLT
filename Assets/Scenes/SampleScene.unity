@@ -468,6 +468,7 @@ GameObject:
   - component: {fileID: 696878834}
   - component: {fileID: 696878838}
   - component: {fileID: 696878839}
+  - component: {fileID: 696878840}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -587,6 +588,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   deathMessagePrefab: {fileID: 6024246982095328705, guid: 377312a6bf3e1a040a68cac4cd03f687,
     type: 3}
+--- !u!114 &696878840
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 696878833}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a68329d64fee3b4c9ccb85b9f6b65c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shootButton: {fileID: 0}
+  joystick: {fileID: 0}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0

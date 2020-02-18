@@ -33,7 +33,7 @@ public class Shooting : Bolt.EntityBehaviour<ICustomCubeState>
         muzzleFlash.intensity = 0.0f;
     }
 
-    private void Awake()
+    private void Start()
     {
         Button shootButton = GameObject.FindGameObjectWithTag("ShootButton").GetComponent<Button>();
         shootButton.onClick.AddListener(() => OnShootButtonClick());
