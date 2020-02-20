@@ -8,7 +8,6 @@
         {
           "Name": "transform",
           "Enabled": true,
-          "Expanded": true,
           "Comment": "This is my transform! yay",
           "Priority": 2,
           "PropertyType": {
@@ -90,7 +89,6 @@
         {
           "Name": "team",
           "Enabled": true,
-          "Expanded": true,
           "ReplicationMode": 1,
           "Comment": "",
           "Priority": 1,
@@ -111,7 +109,6 @@
         {
           "Name": "name",
           "Enabled": true,
-          "Expanded": true,
           "ReplicationMode": 1,
           "Comment": "",
           "Priority": 1,
@@ -155,7 +152,6 @@
         {
           "Name": "weapon",
           "Enabled": true,
-          "Expanded": true,
           "Comment": "",
           "Priority": 1,
           "PropertyType": {
@@ -173,7 +169,6 @@
         {
           "Name": "kills",
           "Enabled": true,
-          "Expanded": true,
           "ReplicationMode": 1,
           "Comment": "",
           "Priority": 1,
@@ -246,7 +241,6 @@
         {
           "Name": "health",
           "Enabled": true,
-          "Expanded": true,
           "ReplicationMode": 1,
           "Comment": "",
           "Priority": 1,
@@ -266,7 +260,6 @@
         {
           "Name": "MoveZ",
           "Enabled": true,
-          "Expanded": true,
           "Comment": "",
           "Priority": 1,
           "PropertyType": {
@@ -294,7 +287,6 @@
         {
           "Name": "MoveX",
           "Enabled": true,
-          "Expanded": true,
           "Comment": "",
           "Priority": 1,
           "PropertyType": {
@@ -322,7 +314,6 @@
         {
           "Name": "Jump",
           "Enabled": true,
-          "Expanded": true,
           "Comment": "",
           "Priority": 1,
           "PropertyType": {
@@ -340,7 +331,6 @@
         {
           "Name": "Aiming",
           "Enabled": true,
-          "Expanded": true,
           "Comment": "",
           "Priority": 1,
           "PropertyType": {
@@ -358,7 +348,6 @@
         {
           "Name": "Fire",
           "Enabled": true,
-          "Expanded": true,
           "Comment": "",
           "Priority": 1,
           "PropertyType": {
@@ -3480,6 +3469,32 @@
           "Priority": 1,
           "PropertyType": {
             "$type": "Bolt.Compiler.PropertyTypeTrigger, bolt.compiler"
+          },
+          "AssetSettings": {
+            "$type": "Bolt.Compiler.PropertyStateSettings, bolt.compiler",
+            "ExtrapolationErrorTolerance": 0.25,
+            "_ExtrapolationCorrectionFrames": 6,
+            "ExtrapolationMaxFrames": 9,
+            "SnapMagnitude": 10.0
+          }
+        },
+        {
+          "Name": "XP",
+          "Enabled": true,
+          "Expanded": true,
+          "ReplicationMode": 1,
+          "Priority": 1,
+          "PropertyType": {
+            "$type": "Bolt.Compiler.PropertyTypeFloat, bolt.compiler",
+            "Compression": {
+              "MinValue": -2048,
+              "MaxValue": 2048,
+              "Accuracy": 0.01,
+              "Pack": 100.0,
+              "Read": 0.01,
+              "Shift": 2048.0,
+              "BitsRequired": 19
+            }
           },
           "AssetSettings": {
             "$type": "Bolt.Compiler.PropertyStateSettings, bolt.compiler",

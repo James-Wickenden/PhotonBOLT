@@ -112,7 +112,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _sceneGuid: 
   _serializerGuid: 5415172f-4903-4b59-911e-ea037a07f041
-  _prefabId: 1
+  _prefabId: 2
   _updateRate: 1
   _autoFreezeProxyFrames: 0
   _clientPredicted: 1
@@ -174,6 +174,8 @@ MonoBehaviour:
     type: 3}
   bulletSpeed: 15
   muzzle: {fileID: 6471162242655870104}
+  muzzleFlashDuration: 0.01
+  muzzleFlashIntensity: 0.5
 --- !u!1 &6471162242655870104
 GameObject:
   m_ObjectHideFlags: 0
