@@ -1,9 +1,13 @@
 ﻿using System;
 using UdpKit;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Menu : Bolt.GlobalEventListener
 {
+    public Button joinGameButtonPrefab;
+    public GameObject serverListPanel;
+
     public void StartServer() {
         BoltLauncher.StartServer();
     }
@@ -17,19 +21,12 @@ public class Menu : Bolt.GlobalEventListener
         
         if (BoltNetwork.IsServer)
         {
-            BoltNetwork.LoadScene("SampleScene");
             string matchName = "Test Match";
-            BoltNetwork.SetServerInfo(matchName, null);
 
+            BoltNetwork.SetServerInfo(matchName, null);
+            BoltNetwork.LoadScene("SampleScene");
         }
-        // else
-        // {
-        //     clientStarted = true;
-        // }
-        // if (BoltNetwork.IsServer) {
-        //     
-        //     BoltNetwork.LoadScene("SampleScene");
-        // }
+
     }
 
 
@@ -46,12 +43,23 @@ public class Menu : Bolt.GlobalEventListener
     public override void SessionListUpdated(Map<Guid, UdpSession> sessionList) {
         foreach (var session in sessionList) {
             UdpSession photonSession = session.Value as UdpSession;
-            BoltNetwork.Connect(photonSession, null);
-            Debug.LogFormat("Source is", photonSession.Source, "and endpoint is", photonSession.LanEndPoint);
+
+            Button joinGameButtonClone = Instantiate(joinGameButtonPrefab);
+            joinGameButtonClone.transform.parent = serverListPanel.transform;
+            joinGameButtonClone.transform.localPosition = new Vector3(0, 0, 0);
+
+            joinGameButtonClone.onClick.AddListener(() => JoinGame(photonSession));
+
+            //Debug.LogFormat("Source is", photonSession.Source, "and endpoint is", photonSession.LanEndPoint);
 
             // if (photonSession.Source == UdpSessionSource.Lan) {
             //     BoltNetwork.Connect(photonSession);
             // }
         }
+    }
+
+    private void JoinGame(UdpSession photonSession)
+    {
+        BoltNetwork.Connect(photonSession, null);
     }
 }
