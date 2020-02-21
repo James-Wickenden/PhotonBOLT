@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
-
 public class DmgAnimation : Bolt.EntityEventListener<ICustomCubeState>
 {
     private float resetColorTime;
@@ -17,6 +15,7 @@ public class DmgAnimation : Bolt.EntityEventListener<ICustomCubeState>
 
     public void StartAnimation()
     {
+        Debug.Log("Health lost");
         var flash = DamageTakenEvent.Create(entity);
         flash.FlashColor = Color.red;
         flash.Send();

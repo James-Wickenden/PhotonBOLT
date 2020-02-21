@@ -18,14 +18,25 @@ public class PlayerMovement : Bolt.EntityBehaviour<ICustomCubeState>
 
     private Rigidbody rb;
 
-    public void Awake()
+    public void Start()
     {
         // Get joystick
+        DeathMessage.OnRespawn += resetTransforms;
         joystick = GameObject.FindGameObjectWithTag("joystick").GetComponent<Joystick>();
         rb = GetComponent<Rigidbody>();
     }
 
+    private void resetTransforms()
+    {
+        state.SetTransforms(state.CubeTransform, gameObject.transform);
+    }
     public override void Attached()
+    {
+        Debug.Log("Player movement attached");
+        state.SetTransforms(state.CubeTransform, gameObject.transform);
+    }
+
+    public void OnEnable()
     {
         state.SetTransforms(state.CubeTransform, gameObject.transform);
     }

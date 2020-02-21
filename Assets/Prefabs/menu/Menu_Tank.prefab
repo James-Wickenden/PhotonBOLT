@@ -48,7 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _sceneGuid: 
   _serializerGuid: 5415172f-4903-4b59-911e-ea037a07f041
-  _prefabId: 2
+  _prefabId: 1
   _updateRate: 1
   _autoFreezeProxyFrames: 0
   _clientPredicted: 1
@@ -244,17 +244,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: -2643173543783292932, guid: a32e4499c0fe80647b800de59c82861a,
         type: 3}
+    - target: {fileID: 4551221000406166484, guid: 080e86edcd193ad43beb65789768f3b0,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2055661412613976128, guid: 080e86edcd193ad43beb65789768f3b0,
         type: 3}
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 5349306228968797622, guid: a32e4499c0fe80647b800de59c82861a,
         type: 3}
-    - target: {fileID: 4551221000406166484, guid: 080e86edcd193ad43beb65789768f3b0,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 080e86edcd193ad43beb65789768f3b0, type: 3}
 --- !u!4 &4991155408028692427 stripped

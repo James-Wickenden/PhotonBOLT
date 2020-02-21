@@ -16,6 +16,7 @@ public class Health : Bolt.EntityBehaviour<ICustomCubeState>
 
     public static event System.Action<Health> OnHealthAdded = delegate { };
     public static event System.Action<Health> OnHealthRemoved = delegate { };
+    public static event System.Action OnDeathOccured = delegate { };
 
 
     private void OnEnable()
@@ -27,6 +28,7 @@ public class Health : Bolt.EntityBehaviour<ICustomCubeState>
     private void Awake()
     {
         GetComponentInParent<HitDetection>().OnPlayerHit += ModifyHealth;
+        DeathMessage.OnRespawn += resetHealth;   
     }
 
     public void ModifyHealth(float amount)
@@ -34,6 +36,11 @@ public class Health : Bolt.EntityBehaviour<ICustomCubeState>
         state.Health += amount;
         if (amount > 0) OnHealthGained();
         else OnHealthLost();
+    }
+
+    private void resetHealth()
+    {
+        state.Health = maxHealth;
     }
 
     //TODO: remove. This is for testing.
@@ -59,7 +66,7 @@ public class Health : Bolt.EntityBehaviour<ICustomCubeState>
        state.AddCallback("Health", HealthCallback);
    }
 
-   private void HealthCallback()
+   public void HealthCallback()
    {
        currentHealth = state.Health;
        float currentHealthPct = (float)currentHealth / (float)maxHealth;
@@ -67,7 +74,11 @@ public class Health : Bolt.EntityBehaviour<ICustomCubeState>
        
        if (currentHealth <= 0)
        {
-            BoltNetwork.Destroy(gameObject);
+        //    OnDeath();
+        var death = DeathEvent.Create(entity);
+        death.Send();
+        OnDeathOccured();
+        //    BoltNetwork.Destroy(gameObject);
        }
    }
 

@@ -30,6 +30,7 @@ GameObject:
   - component: {fileID: 2792700995955786413}
   - component: {fileID: -753705585944078245}
   - component: {fileID: 3494549931102064317}
+  - component: {fileID: 5113076394008305670}
   m_Layer: 0
   m_Name: tank
   m_TagString: Untagged
@@ -67,7 +68,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _sceneGuid: 
   _serializerGuid: 5415172f-4903-4b59-911e-ea037a07f041
-  _prefabId: 3
+  _prefabId: 4
   _updateRate: 1
   _autoFreezeProxyFrames: 0
   _clientPredicted: 1
@@ -76,7 +77,7 @@ MonoBehaviour:
   _sceneObjectDestroyOnDetach: 1
   _sceneObjectAutoAttach: 1
   _alwaysProxy: 0
-  _detachOnDisable: 1
+  _detachOnDisable: 0
   _allowFirstReplicationWhenFrozen: 0
   _autoRemoveChildEntities: 0
   _entityBehaviourQueryOption: 0
@@ -178,6 +179,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eb19c494d19433a4c843f93d3c853060, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5113076394008305670
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7627626088620761135}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70c478d1dce9da04caa3d01ab6a873c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &804061348588213369
@@ -502,6 +515,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: -8568810957685443416, guid: a32e4499c0fe80647b800de59c82861a,
         type: 3}
+    - target: {fileID: 4551221000406166484, guid: 080e86edcd193ad43beb65789768f3b0,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2055661412613976128, guid: 080e86edcd193ad43beb65789768f3b0,
         type: 3}
       propertyPath: m_Mesh
@@ -549,11 +567,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: -8568810957685443416, guid: a32e4499c0fe80647b800de59c82861a,
         type: 3}
-    - target: {fileID: 4551221000406166484, guid: 080e86edcd193ad43beb65789768f3b0,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5060537546712834509, guid: 080e86edcd193ad43beb65789768f3b0,
         type: 3}
       propertyPath: m_Size.y
