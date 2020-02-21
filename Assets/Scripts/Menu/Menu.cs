@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UdpKit;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,6 +8,8 @@ public class Menu : Bolt.GlobalEventListener
 {
     public Button joinGameButtonPrefab;
     public GameObject serverListPanel;
+
+    private List<Button> joinServerButtons = new List<Button>();
 
     public void StartServer() {
         BoltLauncher.StartServer();
@@ -41,15 +44,17 @@ public class Menu : Bolt.GlobalEventListener
     The client will start the punchthrough process with the Host and joins the game.
     */
     public override void SessionListUpdated(Map<Guid, UdpSession> sessionList) {
+        ClearSessions();
         foreach (var session in sessionList) {
             UdpSession photonSession = session.Value as UdpSession;
 
             Button joinGameButtonClone = Instantiate(joinGameButtonPrefab);
-            joinGameButtonClone.transform.parent = serverListPanel.transform;
-            joinGameButtonClone.transform.localPosition = new Vector3(0, 0, 0);
+            joinGameButtonClone.transform.SetParent(serverListPanel.transform);
+            joinGameButtonClone.transform.localPosition = new Vector3(0, -50 * (joinServerButtons.Count), 0);
 
             joinGameButtonClone.onClick.AddListener(() => JoinGame(photonSession));
 
+            joinServerButtons.Add(joinGameButtonClone);
             //Debug.LogFormat("Source is", photonSession.Source, "and endpoint is", photonSession.LanEndPoint);
 
             // if (photonSession.Source == UdpSessionSource.Lan) {
@@ -61,5 +66,16 @@ public class Menu : Bolt.GlobalEventListener
     private void JoinGame(UdpSession photonSession)
     {
         BoltNetwork.Connect(photonSession, null);
+    }
+
+    private void ClearSessions()
+    {
+
+        foreach (Button button in joinServerButtons)
+        {
+            Destroy(button.gameObject);
+        }
+
+        joinServerButtons.Clear();
     }
 }
