@@ -9,6 +9,8 @@ public class Menu : Bolt.GlobalEventListener
     public Button joinGameButtonPrefab;
     public GameObject serverListPanel;
 
+    public float buttonSpacing = -50;
+
     private List<Button> joinServerButtons = new List<Button>();
 
     public void StartServer() {
@@ -24,7 +26,8 @@ public class Menu : Bolt.GlobalEventListener
         
         if (BoltNetwork.IsServer)
         {
-            string matchName = "Test Match";
+            int randomInt = UnityEngine.Random.Range(0, 9999);
+            string matchName = "Test Match" + randomInt;
 
             BoltNetwork.SetServerInfo(matchName, null);
             BoltNetwork.LoadScene("SampleScene");
@@ -50,10 +53,10 @@ public class Menu : Bolt.GlobalEventListener
 
             Button joinGameButtonClone = Instantiate(joinGameButtonPrefab);
             joinGameButtonClone.transform.SetParent(serverListPanel.transform);
-            joinGameButtonClone.transform.localPosition = new Vector3(0, -50 * (joinServerButtons.Count), 0);
+            joinGameButtonClone.transform.localPosition = new Vector3(0, buttonSpacing * joinServerButtons.Count, 0);
 
             joinGameButtonClone.onClick.AddListener(() => JoinGame(photonSession));
-
+            joinGameButtonClone.GetComponentInChildren<Text>().text = photonSession.HostName;
             joinServerButtons.Add(joinGameButtonClone);
             //Debug.LogFormat("Source is", photonSession.Source, "and endpoint is", photonSession.LanEndPoint);
 
