@@ -22,8 +22,6 @@ public class Menu : Bolt.GlobalEventListener
     }
 
     public override void BoltStartDone() {
-        BoltNetwork.EnableLanBroadcast();
-        
         if (BoltNetwork.IsServer)
         {
             int randomInt = UnityEngine.Random.Range(0, 9999);
