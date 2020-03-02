@@ -6,8 +6,13 @@ using UnityEngine.UI;
 
 public class Menu : Bolt.GlobalEventListener
 {
+    public InputField roomNameInput;
+
     public Button joinGameButtonPrefab;
     public GameObject serverListPanel;
+
+
+    public int maxPlayers = 1;
 
     public float buttonSpacing = -50;
 
@@ -27,7 +32,7 @@ public class Menu : Bolt.GlobalEventListener
         if (BoltNetwork.IsServer)
         {
             int randomInt = UnityEngine.Random.Range(0, 9999);
-            string matchName = "Test Match" + randomInt;
+            string matchName = roomNameInput.text;
 
             BoltNetwork.SetServerInfo(matchName, null);
             BoltNetwork.LoadScene("SampleScene");
@@ -51,18 +56,34 @@ public class Menu : Bolt.GlobalEventListener
         foreach (var session in sessionList) {
             UdpSession photonSession = session.Value as UdpSession;
 
+            if (photonSession.ConnectionsCurrent >= maxPlayers)
+            {
+                joinGameButtonPrefab.interactable = false
+                    ;
+            }
+
             Button joinGameButtonClone = Instantiate(joinGameButtonPrefab);
+
             joinGameButtonClone.transform.SetParent(serverListPanel.transform);
             joinGameButtonClone.transform.localPosition = new Vector3(0, buttonSpacing * joinServerButtons.Count, 0);
 
             joinGameButtonClone.onClick.AddListener(() => JoinGame(photonSession));
-            joinGameButtonClone.GetComponentInChildren<Text>().text = photonSession.HostName;
+            joinGameButtonClone.GetComponentInChildren<Text>().text = photonSession.HostName
+                                                                    + " ("
+                                                                    + photonSession.ConnectionsCurrent
+                                                                    + "/"
+                                                                    + maxPlayers
+                                                                    + ")";
+
+
+
             joinServerButtons.Add(joinGameButtonClone);
-            //Debug.LogFormat("Source is", photonSession.Source, "and endpoint is", photonSession.LanEndPoint);
+            Debug.LogFormat("Source is", photonSession.Source, "and endpoint is", photonSession.LanEndPoint);
 
             // if (photonSession.Source == UdpSessionSource.Lan) {
             //     BoltNetwork.Connect(photonSession);
             // }
+            joinGameButtonPrefab.interactable = true;
         }
     }
 
