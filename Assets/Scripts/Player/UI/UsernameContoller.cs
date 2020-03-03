@@ -1,18 +1,39 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UsernameContoller : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField]
+    private UsernameTag usernameTagPrefab;
+
+    private Dictionary<Username, UsernameTag> usernameTags = new Dictionary<Username, UsernameTag>();
+
+    private void Awake()
     {
-        
+        Username.OnUsernameAdded += AddUsername;
+        Username.OnUsernameRemoved += RemoveUsername;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void AddUsername(Username username)
     {
-        
+        Debug.Log("ADDsetUserName: ");
+        if (!usernameTags.ContainsKey(username))
+        {
+            var usernameTag = Instantiate(usernameTagPrefab, transform);
+            usernameTag.setUsername(username);
+            usernameTags.Add(username, usernameTag);
+        }
+    }
+
+    private void RemoveUsername(Username username)
+    {
+        Debug.Log("RemoveUsername");
+        if (usernameTags.ContainsKey(username))
+        {
+            Destroy(usernameTags[username].gameObject);
+            usernameTags.Remove(username);
+        }
     }
 }

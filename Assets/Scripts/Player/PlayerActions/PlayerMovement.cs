@@ -22,8 +22,13 @@ public class PlayerMovement : Bolt.EntityBehaviour<ICustomCubeState>
     {
         // Get joystick
         RespawnTimer.OnRespawn += resetTransforms;
-        joystick = GameObject.FindGameObjectWithTag("joystick").GetComponent<Joystick>();
         rb = GetComponent<Rigidbody>();
+
+        if (entity.IsOwner)
+        {
+            joystick = GameObject.FindGameObjectWithTag("joystick").GetComponent<Joystick>();
+        }
+        
     }
 
     private void resetTransforms()

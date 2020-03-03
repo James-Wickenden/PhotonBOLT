@@ -6,23 +6,20 @@ public class Username : Bolt.EntityBehaviour<ICustomCubeState>
 {
     private string username;
 
-    public static event System.Action<string> OnUsernameAdded = delegate { };
-    public static event System.Action<string> OnUsernameRemoved = delegate { };
+    public static event System.Action<Username> OnUsernameAdded = delegate { };
+    public static event System.Action<Username> OnUsernameRemoved = delegate { };
+    public event System.Action<string> OnUsernameSet = delegate { };
 
-    void Awake()
+
+    private void OnEnable()
     {
-        ReadyUpController.OnReadyUp += setUserName;
+        Debug.Log("On enable username");
+        OnUsernameAdded(this);
     }
-
-    private void Update()
-    {
-        Debug.Log(username);
-    }
-
     public void setUserName(string username)
     {
         state.Username = username;
-        OnUsernameAdded(username);
+        Debug.Log("username set: " + username);
     }
 
     public override void Attached()
@@ -32,12 +29,13 @@ public class Username : Bolt.EntityBehaviour<ICustomCubeState>
 
     private void OnDisable()
     {
-        OnUsernameRemoved(username);
+        OnUsernameRemoved(this);
     }
 
     private void UserNameCallback()
     {
         username = state.Username;
+        OnUsernameSet(username);
     }
 
 }

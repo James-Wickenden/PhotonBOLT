@@ -35,8 +35,11 @@ public class Shooting : Bolt.EntityBehaviour<ICustomCubeState>
 
     private void Start()
     {
-        Button shootButton = GameObject.FindGameObjectWithTag("ShootButton").GetComponent<Button>();
-        shootButton.onClick.AddListener(() => OnShootButtonClick());
+        if (entity.IsOwner)
+        {
+            Button shootButton = GameObject.FindGameObjectWithTag("ShootButton").GetComponent<Button>();
+            shootButton.onClick.AddListener(() => OnShootButtonClick());
+        }
     }
 
     private void Shoot()
