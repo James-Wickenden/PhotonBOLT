@@ -5,20 +5,31 @@ using UnityEngine;
 [BoltGlobalBehaviour]
 public class NetworkCallbacks : Bolt.GlobalEventListener
 {
+    public static event System.Action OnSceneLoadDone = delegate { };
 
-    public void Awake()
+    private string username;
+
+    public void Awake() 
     {
         RespawnTimer.OnRespawn += respawn;
+        ReadyUpController.OnReadyUp += setUserName;
     }
 
-    public override void SceneLoadLocalDone(string scene) {
-
-        var spawnPosition = new Vector3(Random.Range(-5,5),1,Random.Range(-5,5));
-        BoltNetwork.Instantiate(BoltPrefabs.tank, spawnPosition, Quaternion.identity);
+    public override void SceneLoadLocalDone(string scene)
+    {
+        OnSceneLoadDone();
     }
 
-    private void respawn() {
+    private void setUserName(string username)
+    {
+        this.username = username;
+        respawn();
+    }
+
+    private void respawn()
+    {
         var spawnPosition = new Vector3(Random.Range(-5,5),1,Random.Range(-5,5));
-        BoltNetwork.Instantiate(BoltPrefabs.tank, spawnPosition, Quaternion.identity);
+        var tank = BoltNetwork.Instantiate(BoltPrefabs.tank, spawnPosition, Quaternion.identity);
+        tank.GetComponent<Username>().setUserName(username);
     }
 }
