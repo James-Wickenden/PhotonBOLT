@@ -8,7 +8,7 @@ public class NetworkCallbacks : Bolt.GlobalEventListener
 
     public void Awake()
     {
-        DeathMessage.OnRespawn += respawn;
+        RespawnTimer.OnRespawn += respawn;
     }
 
     public override void SceneLoadLocalDone(string scene) {
