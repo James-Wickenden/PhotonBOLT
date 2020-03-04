@@ -35,7 +35,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7148109606232214309}
-  - {fileID: 5961022491027530890}
+  - {fileID: 3434604086052547979}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -404,7 +404,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9ccb62098a51d4346b17c686118740ac, type: 3}
---- !u!224 &5961022491027530890 stripped
+--- !u!224 &3434604086052547979 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 9012798412051646736, guid: 9ccb62098a51d4346b17c686118740ac,
     type: 3}

@@ -115,7 +115,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   forgroundImage: {fileID: 3000227851951359346}
   updateSpeedSeconds: 0.25
-  positionOffset: 0
+  positionOffset: 2
 --- !u!1 &3000227851951359344
 GameObject:
   m_ObjectHideFlags: 0

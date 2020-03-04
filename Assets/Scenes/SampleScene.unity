@@ -910,15 +910,15 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 3154109516239701637, guid: 9ccb62098a51d4346b17c686118740ac,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3000227851951359344, guid: 9ccb62098a51d4346b17c686118740ac,
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3154109516239701637, guid: 9ccb62098a51d4346b17c686118740ac,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3000227851951359346, guid: 9ccb62098a51d4346b17c686118740ac,
         type: 3}

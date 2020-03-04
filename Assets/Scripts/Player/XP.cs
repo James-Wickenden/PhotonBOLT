@@ -7,7 +7,7 @@ public class XP : Bolt.EntityBehaviour<ICustomCubeState>
     [SerializeField]
     private int maxXP = 100;
 
-    private float currentXP;
+    private float currentXP = 0;
 
     public event System.Action<float> OnXPPctChanged = delegate { };
 
@@ -20,56 +20,49 @@ public class XP : Bolt.EntityBehaviour<ICustomCubeState>
 
     private void OnEnable()
     {
-        currentXP = maxXP;
+        currentXP = 0;
         OnXPAdded(this);
     }
 
     private void Awake()
     {
-        GetComponentInParent<HitDetection>().OnPlayerHit += ModifyXP;
+        GetComponentInParent<Shooting>().OnXP += ModifyXP;
     }
 
-    public void ModifyXP(float amount)
+    public void ModifyXP(int amount)
     {
         state.XP += amount;
         if (amount > 0) OnXPGained();
         else OnXPLost();
+        Debug.Log("XP increased to " + state.XP);
     }
 
-    //TODO: remove. This is for testing.
     private void Update()
     {
         if (entity.IsOwner)
         {
-            if (Input.GetKey(KeyCode.H))
-            {
-                ModifyXP(-1);
-            }
-
-            if (Input.GetKey(KeyCode.J))
-            {
-                ModifyXP(1);
-            }
+            //Debug.Log("Tank: " + entity.NetworkId + " has XP of " + currentXP);
         }
     }
 
-   public override void Attached()
-   {
-       state.XP = currentXP;
-       state.AddCallback("XP", XPCallback);
-   }
+    public override void Attached()
+    {
+        state.XP = currentXP;
+        state.AddCallback("XP", XPCallback);
+    }
 
-   private void XPCallback()
-   {
-       currentXP = state.XP;
-       float currentXPPct = (float)currentXP / (float)maxXP;
-       OnXPPctChanged(currentXPPct);
-       
-       if (currentXP <= 0)
-       {
+    private void XPCallback()
+    {
+        Debug.Log("xp callback, currentXP is: " + currentXP);
+        currentXP = state.XP;
+        float currentXPPct = (float)currentXP / (float)maxXP;
+        OnXPPctChanged(currentXPPct);
+
+        if (currentXP <= 0)
+        {
             BoltNetwork.Destroy(gameObject);
-       }
-   }
+        }
+    }
 
     private void OnDisable()
     {

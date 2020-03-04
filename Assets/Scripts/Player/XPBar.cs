@@ -18,6 +18,7 @@ public class XPBar : MonoBehaviour
 
     public void SetXP(XP XP)
     {
+        Debug.Log("setting xp");
         this.XP = XP;
         XP.OnXPPctChanged += HandleXPChanged;
     }

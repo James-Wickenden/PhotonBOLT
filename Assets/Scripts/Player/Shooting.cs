@@ -23,6 +23,8 @@ public class Shooting : Bolt.EntityBehaviour<ICustomCubeState>
     private bool animStart = false;
     private float startTime;
 
+    public event System.Action<int> OnXP = delegate { };
+
 
     public override void Attached()
     {
@@ -46,9 +48,18 @@ public class Shooting : Bolt.EntityBehaviour<ICustomCubeState>
 
         Projectile projectile = bulletClone.GetComponent<Projectile>();
         projectile.setSourceID(GetInstanceID());
+        projectile.setSourceNetworkID(entity.NetworkId);
 
         bulletClone.velocity = muzzle.transform.forward * projectile.getSpeed();
         bulletClone.transform.rotation = muzzle.transform.rotation;
+
+        //var sourceTank = BoltNetwork.FindEntity(projectile.getSourceNetworkID());
+        //var sourceTankXP = sourceTank.gameObject.GetComponent<XP>();
+        //Debug.Log(sourceTankXP);
+        //Debug.Log("Increasing XP of tank: " + projectile.getSourceNetworkID());
+        //sourceTankXP.ModifyXP(10);
+
+        OnXP(10);
 
 
         startTime = Time.time;
