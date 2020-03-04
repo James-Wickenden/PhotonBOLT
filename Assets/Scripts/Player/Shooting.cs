@@ -28,6 +28,7 @@ public class Shooting : Bolt.EntityBehaviour<ICustomCubeState>
 
     public override void Attached()
     {
+        //OnXP(1);
         state.OnShoot = Shoot;
 
         muzzleFlash = muzzle.AddComponent<Light>();

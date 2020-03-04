@@ -49,6 +49,9 @@ public class XP : Bolt.EntityBehaviour<ICustomCubeState>
     {
         state.XP = currentXP;
         state.AddCallback("XP", XPCallback);
+        Debug.Log("Start XP is: " + state.XP);
+        ModifyXP(1);
+        state.XP = 0;
     }
 
     private void XPCallback()
@@ -60,7 +63,7 @@ public class XP : Bolt.EntityBehaviour<ICustomCubeState>
 
         if (currentXP <= 0)
         {
-            BoltNetwork.Destroy(gameObject);
+            //BoltNetwork.Destroy(gameObject);
         }
     }
 

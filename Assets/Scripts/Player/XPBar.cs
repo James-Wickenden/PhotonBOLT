@@ -16,6 +16,11 @@ public class XPBar : MonoBehaviour
 
     private XP XP;
 
+    public void Awake()
+    {
+        //SetXP(XP);
+    }
+
     public void SetXP(XP XP)
     {
         Debug.Log("setting xp");
