@@ -7,29 +7,39 @@ public class SetTankID : Bolt.EntityBehaviour<ICustomCubeState>
 {
     //bool isInitialised = false;
 
-    //public override void Attached()
-    //{
-    //    if (entity.IsOwner)
-    //    {
-    //        int tankID = GetComponent<TankListener>().tankID;
+    public override void Attached()
+    {
+        GetComponent<TankListener>().OnTankAdded += setID;
+
+        if (entity.IsOwner)
+        {
+            //int tankID = GetComponent<TankListener>().tankID;
 
 
-    //        if (tankID == 0)
-    //        {
-    //            state.TankID = 0;
-    //        }
+            //if (tankID == 0)
+            //{
+            //    state.TankID = 0;
+            //}
 
-    //        else if (!isInitialised)
-    //        {
-    //            // receive tank id
-    //            state.TankID = 1;
+            //else if (!isInitialised)
+            //{
+            //    // receive tank id
+            //    state.TankID = 1;
 
-    //        }
+            //}
 
-    //        isInitialised = true;
+            //isInitialised = true;
 
-    //        Debug.Log("Tank ID set to " + state.TankID);
-    //    }
-    //}
+        }
+    }
+
+    private void setID(int tankID)
+    {
+        if (entity.IsOwner)
+        {
+            state.TankID = tankID;
+            Debug.Log("Tank ID set to " + state.TankID);
+        }
+    }
 
 }

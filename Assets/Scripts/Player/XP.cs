@@ -26,7 +26,8 @@ public class XP : Bolt.EntityBehaviour<ICustomCubeState>
 
     private void Awake()
     {
-        GetComponentInParent<Shooting>().OnXP += ModifyXP;
+        //GetComponentInParent<Shooting>().OnXP += ModifyXP;
+        GetComponentInParent<TankListener>().OnXP += ModifyXP;
     }
 
     public void ModifyXP(int amount)
@@ -34,14 +35,28 @@ public class XP : Bolt.EntityBehaviour<ICustomCubeState>
         state.XP += amount;
         if (amount > 0) OnXPGained();
         else OnXPLost();
-        Debug.Log("XP increased to " + state.XP);
+        //Debug.Log("XP increased to " + state.XP);
     }
 
-    private void Update()
+    public void ModifyXP(int tankID, int amount)
     {
-        if (entity.IsOwner)
+        if (entity.IsOwner && state.TankID == tankID)
         {
-            //Debug.Log("Tank: " + entity.NetworkId + " has XP of " + currentXP);
+            state.XP += amount;
+            if (amount > 0) OnXPGained();
+            else OnXPLost();
+            Debug.Log("XP increased to " + state.XP);
+        }
+    }
+
+    public void ModifyXP(int tankID, Bolt.NetworkId networkID, int amount)
+    {
+        if (entity.IsOwner && entity.NetworkId.Equals(networkID))
+        {
+            state.XP += amount;
+            if (amount > 0) OnXPGained();
+            else OnXPLost();
+            Debug.Log("XP increased to " + state.XP);
         }
     }
 
@@ -49,14 +64,14 @@ public class XP : Bolt.EntityBehaviour<ICustomCubeState>
     {
         state.XP = currentXP;
         state.AddCallback("XP", XPCallback);
-        Debug.Log("Start XP is: " + state.XP);
+        //Debug.Log("Start XP is: " + state.XP);
         ModifyXP(1);
         state.XP = 0;
     }
 
     private void XPCallback()
     {
-        Debug.Log("xp callback, currentXP is: " + currentXP);
+        //Debug.Log("xp callback, currentXP is: " + currentXP);
         currentXP = state.XP;
         float currentXPPct = (float)currentXP / (float)maxXP;
         OnXPPctChanged(currentXPPct);

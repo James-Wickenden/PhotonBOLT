@@ -5,26 +5,26 @@ using UnityEngine;
 [BoltGlobalBehaviour(BoltNetworkModes.Server)]
 public class ServerCallbacks : Bolt.GlobalEventListener
 {
-    public override void Connected(BoltConnection connection)
-    {
-        //var log = TestEvent.Create();
-        //log.Message = 10;
-        //log.Send();
-        //Debug.Log("sent!");
-    }
-
-    public override void Disconnected(BoltConnection connection)
-    {
-        //var log = TestEvent.Create();
-        //log.Message = 10;
-        //log.Send();
-    }
+    private int tankCount = 0;
 
     public override void EntityAttached(BoltEntity entity)
     {
-        var log = TestEvent.Create(entity);
-        log.Message = 10;
+        var log = TestEvent.Create();
+        log.Message = tankCount;
         log.Send();
-        Debug.Log("sent!");
+        //Debug.Log("assigning tankID of "+ tankCount + " to new tank");
+        tankCount += 1;
     }
+
+    public override void OnEvent(XPServerEvent evnt)
+    {
+        //Debug.Log("received XServerEvent from some tank");
+
+        var newEvent = XPClientEvent.Create();
+        newEvent.tankID = evnt.tankID;
+        newEvent.xpVal = evnt.xpVal;
+        newEvent.networkID = evnt.networkID;
+        newEvent.Send();
+    }
+
 }

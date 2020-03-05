@@ -5,21 +5,23 @@ using UnityEngine;
 public class HitDetection : Bolt.EntityEventListener<ICustomCubeState>
 {
     public event System.Action<float> OnPlayerHit = delegate { };
-    public event System.Action<int> OnXPGained = delegate { };
+    //public event System.Action<int, int> OnXP = delegate { };
 
     public void OnCollisionEnter(Collision collision)
     {
-        //Debug.Log("Hit!");
         if (entity.IsOwner)
         {
             //1. Determine if collision.gameObject is a bullet
             //2. Get the source of the bullet
-            Debug.Log(collision.gameObject.GetComponent<Projectile>());
+
             Projectile projectile = collision.gameObject.GetComponent<Projectile>();
 
             if (projectile != null)
             {
                 OnPlayerHit(-projectile.damage);
+                //OnXP(projectile.getSourceID(), 10);
+                //GetComponentInParent<XPEventListener>().sendXP(projectile.getSourceID(), 10);
+
                 //Debug.Log("tank: " + entity.NetworkId + " was hit by projectile from tank: " + projectile.getSourceNetworkID());
 
                 //var sourceTank = BoltNetwork.FindEntity(projectile.getSourceNetworkID());
@@ -36,7 +38,12 @@ public class HitDetection : Bolt.EntityEventListener<ICustomCubeState>
                 //    } 
                 // }
 
-                
+                var xpServerEvent = XPServerEvent.Create();
+                xpServerEvent.xpVal = 10;
+                xpServerEvent.tankID = projectile.getSourceID();
+                xpServerEvent.networkID = projectile.getSourceNetworkID();
+                xpServerEvent.Send();
+
             }
         }
     }

@@ -48,7 +48,7 @@ public class Shooting : Bolt.EntityBehaviour<ICustomCubeState>
         
 
         Projectile projectile = bulletClone.GetComponent<Projectile>();
-        projectile.setSourceID(GetInstanceID());
+        projectile.setSourceID(state.TankID);
         projectile.setSourceNetworkID(entity.NetworkId);
 
         bulletClone.velocity = muzzle.transform.forward * projectile.getSpeed();
@@ -60,7 +60,7 @@ public class Shooting : Bolt.EntityBehaviour<ICustomCubeState>
         //Debug.Log("Increasing XP of tank: " + projectile.getSourceNetworkID());
         //sourceTankXP.ModifyXP(10);
 
-        OnXP(10);
+        //OnXP(10);
 
 
         startTime = Time.time;

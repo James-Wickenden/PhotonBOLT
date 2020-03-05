@@ -61,7 +61,7 @@ public class Health : Bolt.EntityBehaviour<ICustomCubeState>
 
    private void HealthCallback()
    {
-        Debug.Log("health callback, currentHealth is: " + currentHealth);
+        //Debug.Log("health callback, currentHealth is: " + currentHealth);
         currentHealth = state.Health;
        float currentHealthPct = (float)currentHealth / (float)maxHealth;
        OnHealthPctChanged(currentHealthPct);
