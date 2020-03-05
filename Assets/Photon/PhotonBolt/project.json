@@ -2503,7 +2503,6 @@
         {
           "Name": "FlashColor",
           "Enabled": true,
-          "Expanded": true,
           "ReplicationMode": 1,
           "Priority": 1,
           "PropertyType": {
@@ -3673,6 +3672,30 @@
       "EntitySenders": 1,
       "Name": "RespawnEvent",
       "Guid": "ffc29838-4b70-41de-8926-92e1d3ad03a8",
+      "Groups": [
+        "samples"
+      ]
+    },
+    {
+      "$type": "Bolt.Compiler.EventDefinition, bolt.compiler",
+      "Properties": [
+        {
+          "Name": "Username",
+          "Enabled": true,
+          "Expanded": true,
+          "ReplicationMode": 1,
+          "Priority": 1,
+          "PropertyType": {
+            "$type": "Bolt.Compiler.PropertyTypeString, bolt.compiler",
+            "MaxLength": 1
+          },
+          "AssetSettings": {
+            "$type": "Bolt.Compiler.PropertyEventSettings, bolt.compiler"
+          }
+        }
+      ],
+      "Name": "ReadyUpEvent",
+      "Guid": "314ee471-684d-4e54-917b-b0dc97f3d3cf",
       "Groups": [
         "samples"
       ]

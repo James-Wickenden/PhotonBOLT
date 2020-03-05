@@ -13,6 +13,7 @@ public class NetworkCallbacks : Bolt.GlobalEventListener
     {
         RespawnTimer.OnRespawn += respawn;
         ReadyUpController.OnReadyUp += setUserName;
+        ReadyUpController.OnAllPlayersReady += respawn;
     }
 
     public override void SceneLoadLocalDone(string scene)
@@ -23,7 +24,6 @@ public class NetworkCallbacks : Bolt.GlobalEventListener
     private void setUserName(string username)
     {
         this.username = username;
-        respawn();
     }
 
     private void respawn()

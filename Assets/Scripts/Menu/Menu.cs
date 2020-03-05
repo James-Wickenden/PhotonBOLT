@@ -34,8 +34,9 @@ public class Menu : Bolt.GlobalEventListener
             int randomInt = UnityEngine.Random.Range(0, 9999);
             string matchName = roomNameInput.text;
 
-            BoltNetwork.SetServerInfo(matchName, null);
-            BoltNetwork.LoadScene("SampleScene");
+            //BoltNetwork.SetServerInfo(matchName, null);
+            Bolt.Matchmaking.BoltMatchmaking.CreateSession(matchName, null, "SampleScene");
+            //BoltNetwork.LoadScene("SampleScene");
         }
 
     }
@@ -58,8 +59,7 @@ public class Menu : Bolt.GlobalEventListener
 
             if (photonSession.ConnectionsCurrent >= maxPlayers)
             {
-                joinGameButtonPrefab.interactable = false
-                    ;
+                joinGameButtonPrefab.interactable = false;
             }
 
             Button joinGameButtonClone = Instantiate(joinGameButtonPrefab);

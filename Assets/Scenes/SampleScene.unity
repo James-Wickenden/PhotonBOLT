@@ -1339,6 +1339,7 @@ MonoBehaviour:
   readyUpPanel: {fileID: 368393141}
   controlPanel: {fileID: 1505022623}
   usernameInput: {fileID: 598035934}
+  readyPlayers: []
 --- !u!114 &696878843
 MonoBehaviour:
   m_ObjectHideFlags: 0
