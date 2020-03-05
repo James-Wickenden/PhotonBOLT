@@ -26,7 +26,6 @@ public class XP : Bolt.EntityBehaviour<ICustomCubeState>
 
     private void Awake()
     {
-        //GetComponentInParent<Shooting>().OnXP += ModifyXP;
         GetComponentInParent<TankListener>().OnXP += ModifyXP;
     }
 
@@ -45,11 +44,11 @@ public class XP : Bolt.EntityBehaviour<ICustomCubeState>
             state.XP += amount;
             if (amount > 0) OnXPGained();
             else OnXPLost();
-            Debug.Log("XP increased to " + state.XP);
+            //Debug.Log("XP increased to " + state.XP);
         }
     }
 
-    public void ModifyXP(int tankID, Bolt.NetworkId networkID, int amount)
+    public void ModifyXP(Bolt.NetworkId networkID, int amount)
     {
         if (entity.IsOwner && entity.NetworkId.Equals(networkID))
         {

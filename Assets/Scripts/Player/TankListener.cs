@@ -5,7 +5,7 @@ using UnityEngine;
 public class TankListener : Bolt.GlobalEventListener
 {
     public event System.Action<int> OnTankAdded = delegate { };
-    public event System.Action<int, Bolt.NetworkId, int> OnXP = delegate { };
+    public event System.Action<Bolt.NetworkId, int> OnXP = delegate { };
 
     private int tankID = -2;
 
@@ -27,7 +27,7 @@ public class TankListener : Bolt.GlobalEventListener
 
     public override void OnEvent(XPClientEvent evnt)
     {
-        Debug.Log("Received XPClientEvent from tank " + evnt.networkID);
-        OnXP(evnt.tankID, evnt.networkID, evnt.xpVal);
+        //Debug.Log("Received XPClientEvent from tank " + evnt.networkID);
+        OnXP(evnt.networkID, evnt.xpVal);
     }
 }

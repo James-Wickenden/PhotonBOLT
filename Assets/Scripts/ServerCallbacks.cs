@@ -25,6 +25,8 @@ public class ServerCallbacks : Bolt.GlobalEventListener
         newEvent.xpVal = evnt.xpVal;
         newEvent.networkID = evnt.networkID;
         newEvent.Send();
+
+        
     }
 
 }
