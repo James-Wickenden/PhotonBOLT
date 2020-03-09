@@ -22,7 +22,6 @@ public class HitDetection : Bolt.EntityEventListener<ICustomCubeState>
        
                 var xpServerEvent = XPServerEvent.Create(Bolt.GlobalTargets.OnlyServer);
                 xpServerEvent.xpVal = 10;
-                xpServerEvent.tankID = projectile.getSourceID();
                 xpServerEvent.networkID = projectile.getSourceNetworkID();
                 xpServerEvent.Send();
 
