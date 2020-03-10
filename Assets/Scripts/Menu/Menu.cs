@@ -47,10 +47,6 @@ public class Menu : Bolt.GlobalEventListener
     visible room that has been registered on the cloud. To get this information we use the 
     SessionListUpdated handler, that is invoked by Bolt on a regular basis when a 
     new room info arrives internally.
-
-    Below, we go through all available sessions, looking 
-    for one Photon Session and connects to the first one found. 
-    The client will start the punchthrough process with the Host and joins the game.
     */
     public override void SessionListUpdated(Map<Guid, UdpSession> sessionList) {
         ClearSessions();

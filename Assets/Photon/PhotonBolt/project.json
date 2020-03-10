@@ -3699,6 +3699,15 @@
       "Groups": [
         "samples"
       ]
+    },
+    {
+      "$type": "Bolt.Compiler.EventDefinition, bolt.compiler",
+      "Properties": [],
+      "Name": "QueryReadyPlayersEvent",
+      "Guid": "968d50e8-2bbb-416e-b62a-df58759f9c95",
+      "Groups": [
+        "samples"
+      ]
     }
   ],
   "ActiveGroup": "samples"

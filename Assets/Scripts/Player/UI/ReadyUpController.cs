@@ -10,14 +10,20 @@ public class ReadyUpController : Bolt.GlobalEventListener
     public GameObject controlPanel;
     public InputField usernameInput;
 
-    public List<string> readyPlayers;
+    public int minPlayers = 2;
+
+    public HashSet<string> readyPlayers = new HashSet<string>();
 
     public static event System.Action<string> OnReadyUp = delegate { };
     public static event System.Action OnAllPlayersReady = delegate { };
 
+    private bool isReady = false;
+    private string selectedName;
+
     void Start()
     {
         NetworkCallbacks.OnSceneLoadDone += showReadyUpMenu;
+        queryUserNames();
     }
 
     public void showReadyUpMenu()
@@ -27,17 +33,12 @@ public class ReadyUpController : Bolt.GlobalEventListener
 
     public void readyUp()
     {
-        string selectedName = usernameInput.text;
+        selectedName = usernameInput.text;
         if (!readyPlayers.Contains(selectedName))
         {
-            // name not taken
-            //readyPlayers.Add(selectedName);
-
-
-            var readyUp = ReadyUpEvent.Create();
-            readyUp.Username = selectedName;
-            readyUp.Send();
+            claimUsername(selectedName);
             OnReadyUp(selectedName);
+            isReady = true;
         }
         else
         {
@@ -47,11 +48,34 @@ public class ReadyUpController : Bolt.GlobalEventListener
         // else ready up failed.
     }
 
+    public void unReadyUp()
+    {
+        isReady = false;
+    }
+
+    private void queryUserNames()
+    {
+        var query = QueryReadyPlayersEvent.Create();
+        query.Send();
+    }
+
+    private void claimUsername(string username)
+    {
+        var readyUp = ReadyUpEvent.Create();
+        readyUp.Username = username;
+        readyUp.Send();
+    }
+
+    private void freeUsername(string username)
+    {
+        //var unReadyUp = ReadyUpEvent.Create();
+        //unReadyUp.Username = username;
+        //unReadyUp.Send();
+    }
+
     public void Update()
     {
-        int numSessions = Bolt.Matchmaking.BoltMatchmaking.CurrentSession.ConnectionsCurrent;
-        Debug.Log("Num sessions: " + numSessions);
-        if (readyPlayers.Count >= 2)
+        if (readyPlayers.Count >= minPlayers)
         {
             readyUpPanel.SetActive(false);
             controlPanel.SetActive(true);
@@ -65,5 +89,13 @@ public class ReadyUpController : Bolt.GlobalEventListener
     public override void OnEvent(ReadyUpEvent evnt)
     {
         readyPlayers.Add(evnt.Username);
+    }
+
+    public override void OnEvent(QueryReadyPlayersEvent evnt)
+    {
+        if (isReady)
+        {
+            claimUsername(selectedName);
+        }
     }
 }
