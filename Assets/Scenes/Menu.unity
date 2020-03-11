@@ -697,9 +697,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fc05135293060a4683e29c631770599, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  joinGameButtonPrefab: {fileID: 8079558914261716956, guid: 2685027df1b1ab04ba1573c723e30095,
-    type: 3}
+  joinGameButtonPrefab: {fileID: 281590252}
   serverListPanel: {fileID: 47682637}
+  buttonSpacing: -50
 --- !u!114 &855102671
 MonoBehaviour:
   m_ObjectHideFlags: 0
