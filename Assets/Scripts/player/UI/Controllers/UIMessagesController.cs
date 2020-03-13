@@ -13,7 +13,7 @@ public class UIMessagesController : MonoBehaviour
     }
     
     private void DisplayDeathMessage() {
-        var deathMessage = Instantiate(deathMessagePrefab, transform);
-
+        deathMessagePrefab.gameObject.SetActive(true);
     }
+
 }

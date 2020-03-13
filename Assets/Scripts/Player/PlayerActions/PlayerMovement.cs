@@ -21,9 +21,14 @@ public class PlayerMovement : Bolt.EntityBehaviour<ICustomCubeState>
     public void Start()
     {
         // Get joystick
-        DeathMessage.OnRespawn += resetTransforms;
-        joystick = GameObject.FindGameObjectWithTag("joystick").GetComponent<Joystick>();
+        RespawnTimer.OnRespawn += resetTransforms;
         rb = GetComponent<Rigidbody>();
+
+        if (entity.IsOwner)
+        {
+            joystick = GameObject.FindGameObjectWithTag("joystick").GetComponent<Joystick>();
+        }
+        
     }
 
     private void resetTransforms()
