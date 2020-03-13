@@ -43,7 +43,7 @@ public class Scoreboard : Bolt.GlobalEventListener
     }
 
     private void refreshScoreboard() {
-        Dictionary<int, string> scoreMap = new Dictionary<int, string>();
+        Dictionary<string, int> scoreMap = new Dictionary<string, int>();
         scoreMap.Clear();
 
         // TODO: Fix this!
@@ -57,26 +57,26 @@ public class Scoreboard : Bolt.GlobalEventListener
             
             // Placeholder values
             playerScore = player.GetComponent<XP>().GetXP();
-            playerID = player.NetworkId.ToString();
-            scoreMap.Add(playerScore, playerID);
+            playerID = player.GetComponent<Username>().getUsername();
+            scoreMap.Add(playerID, playerScore);
         }
 
         Debug.Log(scoreMap.Count + " players found in server and parsed into scoreboard");
         parseScoreMap(scoreMap);
     }
 
-    private void parseScoreMap(Dictionary<int, string> scoreMap) {
+    private void parseScoreMap(Dictionary<string, int> scoreMap) {
         playerScores.text = "";
 
         // Sorts the player-score map by scores;
         // then writes the player-score pairs to the playerScores text field.
-        List<int> scores = scoreMap.Keys.ToList();
-        scores.Sort();
 
-        foreach (int score in scores) {
-            playerScores.text += scoreMap[score];
+        // this iterates through key-value pairs sorted by value
+        foreach (KeyValuePair<string, int> score in scoreMap.OrderBy(key => -key.Value))
+        {
+            playerScores.text += score.Key;
             playerScores.text += " : ";
-            playerScores.text += score;
+            playerScores.text += score.Value;
             playerScores.text += '\n';
         }
     }
