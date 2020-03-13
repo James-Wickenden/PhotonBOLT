@@ -43,19 +43,20 @@ public class Scoreboard : Bolt.GlobalEventListener
     }
 
     private void refreshScoreboard() {
-        Dictionary<string, string> scoreMap = new Dictionary<string, string>();
+        Dictionary<int, string> scoreMap = new Dictionary<int, string>();
         scoreMap.Clear();
 
         // TODO: Fix this!
         // BoltNetwork.Connections and BoltNetwork.Clients both returns empty lists!
         // PlayerScores are not implemented and must be connected to a player/tank instance!
 
-        string playerScore, playerID;
+        string playerID;
+        int playerScore;
         foreach (var player in BoltNetwork.Entities)
         {
             
             // Placeholder values
-            playerScore = player.GetComponent<XP>().GetXP().ToString();
+            playerScore = player.GetComponent<XP>().GetXP();
             playerID = player.NetworkId.ToString();
             scoreMap.Add(playerScore, playerID);
         }
@@ -64,15 +65,15 @@ public class Scoreboard : Bolt.GlobalEventListener
         parseScoreMap(scoreMap);
     }
 
-    private void parseScoreMap(Dictionary<string, string> scoreMap) {
+    private void parseScoreMap(Dictionary<int, string> scoreMap) {
         playerScores.text = "";
 
         // Sorts the player-score map by scores;
         // then writes the player-score pairs to the playerScores text field.
-        var scores = scoreMap.Keys.ToList();
+        List<int> scores = scoreMap.Keys.ToList();
         scores.Sort();
 
-        foreach (string score in scores) {
+        foreach (int score in scores) {
             playerScores.text += scoreMap[score];
             playerScores.text += " : ";
             playerScores.text += score;

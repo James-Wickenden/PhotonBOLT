@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7555238951390597831}
   - component: {fileID: 7555238951390597825}
   - component: {fileID: 7555238951390597830}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Scoreboard Header
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -88,7 +88,7 @@ GameObject:
   - component: {fileID: 7555238952232082838}
   - component: {fileID: 7555238952232082832}
   - component: {fileID: 7555238952232082833}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Scores_Subpanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -162,7 +162,7 @@ GameObject:
   - component: {fileID: 7555238952428552576}
   - component: {fileID: 7555238952428552578}
   - component: {fileID: 7555238952428552579}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: ScoreboardPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -237,7 +237,7 @@ GameObject:
   - component: {fileID: 7555238953002624418}
   - component: {fileID: 7555238953002624428}
   - component: {fileID: 7555238953002624429}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Scores Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
