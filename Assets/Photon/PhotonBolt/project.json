@@ -3708,6 +3708,7 @@
       "Groups": [
         "samples"
       ]
+<<<<<<< Updated upstream
     },
     {
       "$type": "Bolt.Compiler.EventDefinition, bolt.compiler",
@@ -3732,6 +3733,8 @@
       "Groups": [
         "samples"
       ]
+=======
+>>>>>>> Stashed changes
     }
   ],
   "ActiveGroup": "samples"
