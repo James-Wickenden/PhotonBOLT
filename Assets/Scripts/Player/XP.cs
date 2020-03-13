@@ -7,7 +7,7 @@ public class XP : Bolt.EntityBehaviour<ICustomCubeState>
     [SerializeField]
     private int maxXP = 100;
 
-    private float currentXP = 0;
+    private int currentXP = 0;
 
     public event System.Action<float> OnXPPctChanged = delegate { };
 
@@ -37,7 +37,6 @@ public class XP : Bolt.EntityBehaviour<ICustomCubeState>
             if (amount > 0) OnXPGained();
             else OnXPLost();
         }
-        //Debug.Log("XP increased to " + state.XP);
     }
 
     public void ModifyXP(Bolt.NetworkId networkID, int amount)
@@ -49,6 +48,12 @@ public class XP : Bolt.EntityBehaviour<ICustomCubeState>
             if (amount > 0) OnXPGained();
             else OnXPLost();
             Debug.Log("XP increased to " + state.XP);
+
+            if (state.XP % maxXP == 0)
+            {
+                Debug.Log("Player obtains credit of 10");
+                state.UpgradeCredit += 10;
+            }
         }
     }
 
@@ -56,7 +61,6 @@ public class XP : Bolt.EntityBehaviour<ICustomCubeState>
     {
         if (entity.IsOwner) { 
             state.XP = currentXP;
-            //Debug.Log("Start XP is: " + state.XP);
             ModifyXP(1);
             state.XP = 0;
         }
@@ -68,13 +72,8 @@ public class XP : Bolt.EntityBehaviour<ICustomCubeState>
     {
         //Debug.Log("xp callback, currentXP is: " + currentXP);
         currentXP = state.XP;
-        float currentXPPct = (float)currentXP / (float)maxXP;
+        float currentXPPct = ((float)currentXP % maxXP) / (float)maxXP;
         OnXPPctChanged(currentXPPct);
-
-        if (currentXP <= 0)
-        {
-            //BoltNetwork.Destroy(gameObject);
-        }
     }
 
     private void OnDisable()
