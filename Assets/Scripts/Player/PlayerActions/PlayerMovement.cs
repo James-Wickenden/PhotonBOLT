@@ -41,10 +41,10 @@ public class PlayerMovement : Bolt.EntityBehaviour<ICustomCubeState>
         state.SetTransforms(state.CubeTransform, gameObject.transform);
     }
 
-    public void OnEnable()
-    {
-        state.SetTransforms(state.CubeTransform, gameObject.transform);
-    }
+    //public void OnEnable()
+    //{
+    //    state.SetTransforms(state.CubeTransform, gameObject.transform);
+    //}
 
     public override void SimulateOwner()
     {

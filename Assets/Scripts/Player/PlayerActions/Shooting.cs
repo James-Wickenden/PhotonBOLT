@@ -49,6 +49,7 @@ public class Shooting : Bolt.EntityBehaviour<ICustomCubeState>
 
         Projectile projectile = bulletClone.GetComponent<Projectile>();
         projectile.setSourceID(GetInstanceID());
+        projectile.setSourceNetworkID(entity.NetworkId);
 
         bulletClone.velocity = muzzle.transform.forward * projectile.getSpeed();
         bulletClone.transform.rotation = muzzle.transform.rotation;
