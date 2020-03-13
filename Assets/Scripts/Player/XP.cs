@@ -29,6 +29,11 @@ public class XP : Bolt.EntityBehaviour<ICustomCubeState>
         GetComponentInParent<TankListener>().OnXP += ModifyXP;
     }
 
+    public int GetXP()
+    {
+        return currentXP;
+    }
+
     public void ModifyXP(int amount)
     {
         if (entity.IsOwner)

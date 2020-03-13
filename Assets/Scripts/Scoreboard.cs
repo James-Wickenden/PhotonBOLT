@@ -51,18 +51,14 @@ public class Scoreboard : Bolt.GlobalEventListener
         // PlayerScores are not implemented and must be connected to a player/tank instance!
 
         string playerScore, playerID;
-        foreach (var player in BoltNetwork.Connections)
+        foreach (var player in BoltNetwork.Entities)
         {
+            
             // Placeholder values
-            playerScore = "100";
-            playerID = "0";
+            playerScore = player.GetComponent<XP>().GetXP().ToString();
+            playerID = player.NetworkId.ToString();
             scoreMap.Add(playerScore, playerID);
         }
-        
-        scoreMap.Add("300", "3");
-        scoreMap.Add("200", "2");
-        scoreMap.Add("100", "1");
-        scoreMap.Add("400", "4");
 
         Debug.Log(scoreMap.Count + " players found in server and parsed into scoreboard");
         parseScoreMap(scoreMap);
