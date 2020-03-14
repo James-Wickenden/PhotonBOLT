@@ -38,15 +38,6 @@ public class NetworkCallbacks : Bolt.GlobalEventListener
         tank.GetComponent<Scoring>().setScore(score);
     }
 
-    //public override void OnEvent(KeepScoreEvent evnt)
-    //{
-    //    if (username == evnt.username)
-    //    {
-    //        Debug.Log("score received");
-    //        score = evnt.score;
-    //    }
-    //}
-
     private void storeScore(int newScore)
     {
         score = newScore;

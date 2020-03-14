@@ -52,14 +52,6 @@ public class Scoring : Bolt.EntityBehaviour<ICustomCubeState>
         currentScore = state.Score;
     }
 
-    private void PlayerDeath()
-    {
-        // we have to tell networkcallbacks to store currentScore
-        KeepScoreEvent evnt = KeepScoreEvent.Create(Bolt.GlobalTargets.OnlySelf);
-        evnt.username = state.Username;
-        evnt.score = currentScore;
-        evnt.Send();
-    }
 
     private void storeScore()
     {
