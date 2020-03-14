@@ -6,13 +6,13 @@ public class Scoring : Bolt.EntityBehaviour<ICustomCubeState>
 {
 
     private int currentScore = 0;
-    //public static event System.Action OnResetScore = delegate { };
+    public event System.Action<int> OnStoreScore = delegate { };
 
 
     private void Awake()
     {
         GetComponentInParent<TankListener>().OnXP += ModifyScore;
-        //Health.OnStoreScore += PlayerDeath;
+        Health.OnDeathOccuring += storeScore;
     }
 
     private void ModifyScore(Bolt.NetworkId networkID, int amount)
@@ -27,14 +27,14 @@ public class Scoring : Bolt.EntityBehaviour<ICustomCubeState>
     {
         if (entity.IsOwner)
         {
-            state.Score = 0;
+            state.Score = currentScore;
         }
 
         state.AddCallback("Score", ScoreCallback);
 
     }
 
-    public int getScore()
+    public int GetScore()
     {
         return currentScore;
     }
@@ -42,8 +42,8 @@ public class Scoring : Bolt.EntityBehaviour<ICustomCubeState>
     public void setScore(int score)
     {
         currentScore = score;
+        if (entity.IsOwner) state.Score = score;
         Debug.Log("Score set : " + score);
-        //state.Score = score;
     }
 
 
@@ -59,5 +59,10 @@ public class Scoring : Bolt.EntityBehaviour<ICustomCubeState>
         evnt.username = state.Username;
         evnt.score = currentScore;
         evnt.Send();
+    }
+
+    private void storeScore()
+    {
+        OnStoreScore(currentScore);
     }
 }

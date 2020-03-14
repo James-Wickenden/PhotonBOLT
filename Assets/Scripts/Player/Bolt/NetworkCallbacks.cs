@@ -15,7 +15,6 @@ public class NetworkCallbacks : Bolt.GlobalEventListener
         RespawnTimer.OnRespawn += respawn;
         ReadyUpController.OnReadyUp += setUserName;
         ReadyUpController.OnAllPlayersReady += respawn;
-        Health.OnStoreScore += storeScore;
         score = 0;
     }
 
@@ -35,7 +34,7 @@ public class NetworkCallbacks : Bolt.GlobalEventListener
         var tank = BoltNetwork.Instantiate(BoltPrefabs.tank, spawnPosition, Quaternion.identity);
         tank.GetComponent<Username>().setUserName(username);
 
-        Health.OnStoreScore += storeScore;
+        tank.GetComponent<Scoring>().OnStoreScore += storeScore;
         tank.GetComponent<Scoring>().setScore(score);
     }
 
@@ -51,6 +50,6 @@ public class NetworkCallbacks : Bolt.GlobalEventListener
     private void storeScore(int newScore)
     {
         score = newScore;
-        Debug.Log("Score has been stored");
+        Debug.Log("Score stored as : " + score);
     }
 }

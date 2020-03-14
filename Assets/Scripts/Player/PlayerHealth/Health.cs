@@ -17,7 +17,8 @@ public class Health : Bolt.EntityBehaviour<ICustomCubeState>
     public static event System.Action<Health> OnHealthAdded = delegate { };
     public static event System.Action<Health> OnHealthRemoved = delegate { };
     public static event System.Action OnDeathOccured = delegate { };
-    public static event System.Action<int> OnStoreScore = delegate { };
+
+    public static event System.Action OnDeathOccuring = delegate { };
 
 
     private void OnEnable()
@@ -57,10 +58,11 @@ public class Health : Bolt.EntityBehaviour<ICustomCubeState>
        float currentHealthPct = (float)currentHealth / (float)maxHealth;
        OnHealthPctChanged(currentHealthPct);
 
-       OnStoreScore(state.Score);
 
         if (currentHealth <= 0)
        {
+            OnDeathOccuring();
+
             var death = DeathEvent.Create(entity);
             death.Send();
             OnDeathOccured();

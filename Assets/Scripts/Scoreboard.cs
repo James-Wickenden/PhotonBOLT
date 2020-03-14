@@ -56,7 +56,7 @@ public class Scoreboard : Bolt.GlobalEventListener
         {
             
             // Placeholder values
-            playerScore = player.GetComponent<XP>().GetXP();
+            playerScore = player.GetComponent<Scoring>().GetScore();
             playerID = player.GetComponent<Username>().getUsername();
             scoreMap.Add(playerID, playerScore);
         }
