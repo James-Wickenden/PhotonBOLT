@@ -11,6 +11,7 @@ public class Scoreboard : Bolt.GlobalEventListener
     public GameObject modelScoreboard;
     private GameObject scoreboard;
     private Text playerScores;
+    private Dictionary<string, int> respawning;
     
     private void Start() {
         scoreboard = Instantiate(modelScoreboard, GameObject.FindGameObjectWithTag("Canvas").transform);
@@ -20,6 +21,8 @@ public class Scoreboard : Bolt.GlobalEventListener
         scoreboardButton.onClick.AddListener(() => ToggleScoreboard());
         scoreboard.SetActive(false);
         //Debug.Log("Initialised scoreboard listener");
+
+        respawning = new Dictionary<string, int>();
     }
 
     private void ToggleScoreboard() {
@@ -61,6 +64,17 @@ public class Scoreboard : Bolt.GlobalEventListener
             scoreMap.Add(playerID, playerScore);
         }
 
+        foreach (string respawner in respawning.Keys.ToList())
+        {
+            if (!scoreMap.Keys.ToList().Contains(respawner)) {
+                scoreMap.Add(respawner, respawning[respawner]);
+            }
+            else
+            {
+                respawning.Remove(respawner);
+            }
+        }
+
         Debug.Log(scoreMap.Count + " players found in server and parsed into scoreboard");
         parseScoreMap(scoreMap);
     }
@@ -79,5 +93,10 @@ public class Scoreboard : Bolt.GlobalEventListener
             playerScores.text += score.Value;
             playerScores.text += '\n';
         }
+    }
+
+    public override void OnEvent(ScoreboardEvent evnt)
+    {
+        respawning.Add(evnt.username, evnt.score);
     }
 }
