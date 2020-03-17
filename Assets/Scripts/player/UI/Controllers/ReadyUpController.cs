@@ -8,9 +8,10 @@ public class ReadyUpController : Bolt.GlobalEventListener
 {
     public GameObject readyUpPanel;
     public GameObject controlPanel;
+    public Text readyUpButtonText;
     public InputField usernameInput;
 
-    public int minPlayers = 2;
+    public int minPlayers;
 
     public HashSet<string> readyPlayers = new HashSet<string>();
 
@@ -31,26 +32,33 @@ public class ReadyUpController : Bolt.GlobalEventListener
         readyUpPanel.SetActive(true);
     }
 
-    public void readyUp()
+    public void toggleReady()
     {
         selectedName = usernameInput.text;
-        if (!readyPlayers.Contains(selectedName))
+        if (!isReady)
         {
-            claimUsername(selectedName);
-            OnReadyUp(selectedName);
-            isReady = true;
+            if (!readyPlayers.Contains(selectedName))
+            {
+                claimUsername(selectedName);
+                OnReadyUp(selectedName);
+                isReady = true;
+                readyUpButtonText.text = "Unready";
+            }
+            else
+            {
+                // Show error msg
+                Debug.Log("ERROR: username \'" + selectedName + "\' was taken.");
+            }
+            // else ready up failed.
         }
         else
         {
-            // Show error msg
-            Debug.Log("ERROR: username \'" + selectedName + "\' was taken.");
+            // unready the player
+            isReady = false;
+            readyUpButtonText.text = "Ready Up!";
+            // TODO: remove the player from the username and isready pools
+            freeUsername(selectedName);
         }
-        // else ready up failed.
-    }
-
-    public void unReadyUp()
-    {
-        isReady = false;
     }
 
     private void queryUserNames()
@@ -68,9 +76,7 @@ public class ReadyUpController : Bolt.GlobalEventListener
 
     private void freeUsername(string username)
     {
-        //var unReadyUp = ReadyUpEvent.Create();
-        //unReadyUp.Username = username;
-        //unReadyUp.Send();
+        readyPlayers.Remove(username);
     }
 
     public void Update()

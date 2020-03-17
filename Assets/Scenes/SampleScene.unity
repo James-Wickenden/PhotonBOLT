@@ -1117,7 +1117,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 696878842}
-        m_MethodName: readyUp
+        m_MethodName: toggleReady
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1126,17 +1126,6 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 2133577576}
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
         m_CallState: 2
 --- !u!114 &691117446
 MonoBehaviour:
@@ -1352,6 +1341,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   readyUpPanel: {fileID: 368393141}
   controlPanel: {fileID: 1505022623}
+  readyUpButtonText: {fileID: 616559298}
   usernameInput: {fileID: 598035934}
   minPlayers: 2
 --- !u!114 &696878843
