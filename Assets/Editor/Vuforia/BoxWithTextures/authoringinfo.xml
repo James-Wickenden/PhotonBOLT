@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QCARInfo>
+<TargetSet version="17.0" toolVersion="8.6.7">
+<ModelTarget name="RaspberryBoxWithTextures" targetId="583e8ef6fc3b4c0bb9753b3fcfbc7a80" version="11.1" toolVersion="8.6.7" bbox="-0.060000 -0.016500 -0.037500 0.060000 0.016926 0.037500" previewImage="583e8ef6fc3b4c0bb9753b3fcfbc7a80_preview.jpg"/>
+
+</TargetSet>
+
+<Assembly name="RaspberryBoxWithTexturess_assembly" assemblyId="b2563d0e4e8b408dabc30757478cdf8b">
+<Part name="RaspberryBoxWithTextures" translation="0 0 0" rotation="AD: 0 0 1 0"/>
+<EntryPoint name="viewpoint_0000" translation="8.50015e-17 0.000190139 0.157929" rotation="AD: 0.9976507286075319 -0.13936712080882188 0.5842402931056059 203.1" image="RaspberryBoxWithTextures_viewpoint_0000.png" trained="yes">
+
+</EntryPoint>
+
+</Assembly>
+
+</QCARInfo>

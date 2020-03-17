@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QCARConfig>
+<Tracking>
+<ModelTarget name="RaspberryBoxWithTextures" motionHint="static"/>
+
+</Tracking>
+
+<Assembly name="RaspberryBoxWithTexturess_assembly" assemblyId="b2563d0e4e8b408dabc30757478cdf8b">
+<Part name="RaspberryBoxWithTextures" translation="0 0 0" rotation="AD: 0 0 1 0"/>
+<EntryPoint name="viewpoint_0000" translation="8.50015e-17 0.000190139 0.157929" rotation="AD: 0.9976507286075319 -0.13936712080882188 0.5842402931056059 203.1" trained="yes">
+
+</EntryPoint>
+
+</Assembly>
+
+</QCARConfig>
