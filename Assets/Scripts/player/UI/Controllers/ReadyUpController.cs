@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class ReadyUpController : Bolt.GlobalEventListener
 {
     public GameObject readyUpPanel;
+    public GameObject scoreboardPanel;
     public GameObject controlPanel;
     public Text readyUpButtonText;
     public InputField usernameInput;
@@ -85,7 +86,7 @@ public class ReadyUpController : Bolt.GlobalEventListener
         {
             readyUpPanel.SetActive(false);
             controlPanel.SetActive(true);
-
+            scoreboardPanel.SetActive(true);
             OnAllPlayersReady();
 
             readyPlayers.Clear();
