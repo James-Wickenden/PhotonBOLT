@@ -50,6 +50,10 @@ public class Scoring : Bolt.EntityBehaviour<ICustomCubeState>
     private void ScoreCallback()
     {
         currentScore = state.Score;
+
+        // Notify every player's scoreboard
+        PlayerScoreEvent evnt = PlayerScoreEvent.Create();
+        evnt.Send();
     }
 
 

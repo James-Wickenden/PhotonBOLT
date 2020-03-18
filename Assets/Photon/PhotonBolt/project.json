@@ -3913,6 +3913,16 @@
       "Groups": [
         "samples"
       ]
+    },
+    {
+      "$type": "Bolt.Compiler.EventDefinition, bolt.compiler",
+      "Properties": [],
+      "EntitySenders": 3,
+      "Name": "PlayerScoreEvent",
+      "Guid": "70137284-0a1c-48e0-a634-82e31d48a6cb",
+      "Groups": [
+        "samples"
+      ]
     }
   ],
   "ActiveGroup": "samples"

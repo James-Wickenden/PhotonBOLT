@@ -11,7 +11,6 @@ public class Scoreboard : Bolt.GlobalEventListener
     public GameObject modelScoreboard;
     private GameObject scoreboard;
     private Text playerScores;
-    //private Dictionary<string, int> scoreMap;
     private Dictionary<string, int> respawning;
     
     private void Start() {
@@ -23,7 +22,6 @@ public class Scoreboard : Bolt.GlobalEventListener
         scoreboard.SetActive(false);
         //Debug.Log("Initialised scoreboard listener");
 
-        //scoreMap = new Dictionary<string, int>();
         respawning = new Dictionary<string, int>();
     }
 
@@ -38,14 +36,6 @@ public class Scoreboard : Bolt.GlobalEventListener
             isScoreboardOpen = false;
             scoreboard.SetActive(false);
             //Debug.Log("Closed scoreboard");
-        }
-    }
-
-    private void Update()
-    {
-        if (isScoreboardOpen)
-        {
-            refreshScoreboard();
         }
     }
 
@@ -85,8 +75,11 @@ public class Scoreboard : Bolt.GlobalEventListener
             }
         }
 
-        Debug.Log(scoreMap.Count + " players found in server and parsed into scoreboard");
+        //Debug.Log(scoreMap.Count + " players found in server and parsed into scoreboard");
         parseScoreMap(scoreMap);
+
+        Debug.Log("Done refreshing scoreboard");
+
     }
 
     private void parseScoreMap(Dictionary<string, int> scoreMap) {
@@ -108,5 +101,14 @@ public class Scoreboard : Bolt.GlobalEventListener
     public override void OnEvent(ScoreboardEvent evnt)
     {
         respawning.Add(evnt.username, evnt.score);
+    }
+
+    public override void OnEvent(PlayerScoreEvent evnt)
+    {
+        // refresh the scoreboard if it's open
+        if (isScoreboardOpen)
+        {
+            refreshScoreboard();
+        }
     }
 }
