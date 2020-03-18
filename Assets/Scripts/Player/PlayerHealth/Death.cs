@@ -13,11 +13,6 @@ public class Death : Bolt.EntityEventListener<ICustomCubeState>
 
     public override void OnEvent(DeathEvent evnt)
     {
-        ScoreboardEvent scoreboardEvent = ScoreboardEvent.Create();
-        scoreboardEvent.username = state.Username;
-        scoreboardEvent.score = state.Score;
-        scoreboardEvent.Send();
-
         BoltNetwork.Destroy(gameObject);
     }
 }

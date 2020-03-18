@@ -53,6 +53,8 @@ public class Scoring : Bolt.EntityBehaviour<ICustomCubeState>
 
         // Notify every player's scoreboard
         PlayerScoreEvent evnt = PlayerScoreEvent.Create();
+        evnt.username = GetComponent<Username>().getUsername();
+        evnt.score = currentScore;
         evnt.Send();
     }
 

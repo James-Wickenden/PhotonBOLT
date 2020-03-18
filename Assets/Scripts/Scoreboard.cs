@@ -11,7 +11,8 @@ public class Scoreboard : Bolt.GlobalEventListener
     public GameObject modelScoreboard;
     private GameObject scoreboard;
     private Text playerScores;
-    private Dictionary<string, int> respawning;
+    private Dictionary<string, int> scoreMap;
+    private bool isInit = false;
     
     private void Start() {
         scoreboard = Instantiate(modelScoreboard, GameObject.FindGameObjectWithTag("Canvas").transform);
@@ -22,7 +23,7 @@ public class Scoreboard : Bolt.GlobalEventListener
         scoreboard.SetActive(false);
         //Debug.Log("Initialised scoreboard listener");
 
-        respawning = new Dictionary<string, int>();
+        scoreMap = new Dictionary<string, int>();
     }
 
     private void ToggleScoreboard() {
@@ -46,40 +47,23 @@ public class Scoreboard : Bolt.GlobalEventListener
     }
 
     private void refreshScoreboard() {
-        Dictionary<string, int> scoreMap = new Dictionary<string, int>();
-        scoreMap.Clear();
-
-        // TODO: Fix this!
-        // BoltNetwork.Connections and BoltNetwork.Clients both returns empty lists!
-        // PlayerScores are not implemented and must be connected to a player/tank instance!
-
-        string playerID;
-        int playerScore;
-        foreach (var player in BoltNetwork.Entities)
+        if (!isInit)
         {
-            // Add each entity to scoreboard
-
-            playerScore = player.GetComponent<Scoring>().GetScore();
-            playerID = player.GetComponent<Username>().getUsername();
-            scoreMap.Add(playerID, playerScore);
-        }
-
-        foreach (string respawner in respawning.Keys.ToList())
-        {
-            if (!scoreMap.Keys.ToList().Contains(respawner)) {
-                scoreMap.Add(respawner, respawning[respawner]);
-            }
-            else
+            int playerScore;
+            string playerID;
+            foreach (var player in BoltNetwork.Entities)
             {
-                respawning.Remove(respawner);
+                // Add each entity to scoreboard
+
+                playerScore = player.GetComponent<Scoring>().GetScore();
+                playerID = player.GetComponent<Username>().getUsername();
+                if (!scoreMap.Keys.Contains(playerID)) scoreMap.Add(playerID, playerScore);
             }
+            isInit = true;
         }
 
         //Debug.Log(scoreMap.Count + " players found in server and parsed into scoreboard");
         parseScoreMap(scoreMap);
-
-        Debug.Log("Done refreshing scoreboard");
-
     }
 
     private void parseScoreMap(Dictionary<string, int> scoreMap) {
@@ -98,17 +82,19 @@ public class Scoreboard : Bolt.GlobalEventListener
         }
     }
 
-    public override void OnEvent(ScoreboardEvent evnt)
-    {
-        respawning.Add(evnt.username, evnt.score);
-    }
-
     public override void OnEvent(PlayerScoreEvent evnt)
     {
+        scoreMap[evnt.username] = evnt.score;
+
         // refresh the scoreboard if it's open
         if (isScoreboardOpen)
         {
             refreshScoreboard();
         }
+    }
+
+    public override void OnEvent(NewPlayerEvent evnt)
+    {
+        if (!scoreMap.Keys.Contains(evnt.username)) scoreMap.Add(evnt.username, 0);
     }
 }
