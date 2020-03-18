@@ -23,9 +23,9 @@ public class NetworkCallbacks : Bolt.GlobalEventListener
         OnSceneLoadDone();
     }
 
-    private void setUserName(string username)
+    private void setUserName(string newUsername)
     {
-        this.username = username;
+        this.username = newUsername;
     }
 
     private void respawn()

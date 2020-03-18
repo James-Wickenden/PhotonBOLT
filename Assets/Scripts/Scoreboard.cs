@@ -11,6 +11,7 @@ public class Scoreboard : Bolt.GlobalEventListener
     public GameObject modelScoreboard;
     private GameObject scoreboard;
     private Text playerScores;
+    //private Dictionary<string, int> scoreMap;
     private Dictionary<string, int> respawning;
     
     private void Start() {
@@ -22,6 +23,7 @@ public class Scoreboard : Bolt.GlobalEventListener
         scoreboard.SetActive(false);
         //Debug.Log("Initialised scoreboard listener");
 
+        //scoreMap = new Dictionary<string, int>();
         respawning = new Dictionary<string, int>();
     }
 
@@ -36,6 +38,14 @@ public class Scoreboard : Bolt.GlobalEventListener
             isScoreboardOpen = false;
             scoreboard.SetActive(false);
             //Debug.Log("Closed scoreboard");
+        }
+    }
+
+    private void Update()
+    {
+        if (isScoreboardOpen)
+        {
+            refreshScoreboard();
         }
     }
 
