@@ -57,8 +57,8 @@ public class Scoreboard : Bolt.GlobalEventListener
         int playerScore;
         foreach (var player in BoltNetwork.Entities)
         {
-            
-            // Placeholder values
+            // Add each entity to scoreboard
+
             playerScore = player.GetComponent<Scoring>().GetScore();
             playerID = player.GetComponent<Username>().getUsername();
             scoreMap.Add(playerID, playerScore);
@@ -85,9 +85,9 @@ public class Scoreboard : Bolt.GlobalEventListener
         // Sorts the player-score map by scores;
         // then writes the player-score pairs to the playerScores text field.
 
-        // this iterates through key-value pairs sorted by value
-        foreach (KeyValuePair<string, int> score in scoreMap.OrderBy(key => -key.Value))
-        {
+        // this iterates through key-value pairs sorted by value, ties are sorted by key
+        foreach (KeyValuePair<string, int> score in scoreMap.OrderByDescending(x => x.Value).ThenBy(x => x.Key))
+        { 
             playerScores.text += score.Key;
             playerScores.text += " : ";
             playerScores.text += score.Value;
