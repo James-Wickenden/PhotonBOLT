@@ -12,7 +12,6 @@ public class Scoreboard : Bolt.GlobalEventListener
     private GameObject scoreboard;
     private Text playerScores;
     private Dictionary<string, int> scoreMap;
-    private bool isInit = false;
     
     private void Start() {
         scoreboard = Instantiate(modelScoreboard, GameObject.FindGameObjectWithTag("Canvas").transform);
@@ -47,21 +46,6 @@ public class Scoreboard : Bolt.GlobalEventListener
     }
 
     private void refreshScoreboard() {
-        if (!isInit)
-        {
-            int playerScore;
-            string playerID;
-            foreach (var player in BoltNetwork.Entities)
-            {
-                // Add each entity to scoreboard
-
-                playerScore = player.GetComponent<Scoring>().GetScore();
-                playerID = player.GetComponent<Username>().getUsername();
-                if (!scoreMap.Keys.Contains(playerID)) scoreMap.Add(playerID, playerScore);
-            }
-            isInit = true;
-        }
-
         //Debug.Log(scoreMap.Count + " players found in server and parsed into scoreboard");
         parseScoreMap(scoreMap);
     }
@@ -85,6 +69,7 @@ public class Scoreboard : Bolt.GlobalEventListener
     public override void OnEvent(PlayerScoreEvent evnt)
     {
         scoreMap[evnt.username] = evnt.score;
+        Debug.Log("score for " + evnt.username + " set to " + evnt.score);
 
         // refresh the scoreboard if it's open
         if (isScoreboardOpen)
@@ -93,7 +78,7 @@ public class Scoreboard : Bolt.GlobalEventListener
         }
     }
 
-    public override void OnEvent(NewPlayerEvent evnt)
+    public override void OnEvent(SetScoreEvent evnt)
     {
         if (!scoreMap.Keys.Contains(evnt.username)) scoreMap.Add(evnt.username, 0);
     }

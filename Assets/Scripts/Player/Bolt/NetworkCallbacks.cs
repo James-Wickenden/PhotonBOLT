@@ -35,8 +35,8 @@ public class NetworkCallbacks : Bolt.GlobalEventListener
         tank.GetComponent<Username>().setUserName(username);
 
         tank.GetComponent<Scoring>().OnStoreScore += storeScore;
-        tank.GetComponent<Scoring>().setScore(score);
 
+        // notify server that there's a new player
         NewPlayerEvent evnt = NewPlayerEvent.Create();
         evnt.username = username;
         evnt.Send();

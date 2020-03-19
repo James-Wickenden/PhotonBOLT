@@ -18,7 +18,7 @@ public class Health : Bolt.EntityBehaviour<ICustomCubeState>
     public static event System.Action<Health> OnHealthRemoved = delegate { };
     public static event System.Action OnDeathOccured = delegate { };
 
-    public static event System.Action OnDeathOccuring = delegate { };
+    //public static event System.Action OnDeathOccuring = delegate { };
 
 
     private void OnEnable()
@@ -61,7 +61,7 @@ public class Health : Bolt.EntityBehaviour<ICustomCubeState>
 
         if (currentHealth <= 0)
        {
-            OnDeathOccuring();
+            //OnDeathOccuring();
 
             var death = DeathEvent.Create(entity);
             death.Send();
