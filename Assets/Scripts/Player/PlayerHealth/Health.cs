@@ -28,7 +28,7 @@ public class Health : Bolt.EntityBehaviour<ICustomCubeState>
     private void Awake()
     {
         GetComponentInParent<HitDetection>().OnPlayerHit += ModifyHealth;
-        DeathMessage.OnRespawn += resetHealth;   
+        RespawnTimer.OnRespawn += resetHealth;
     }
 
     public void ModifyHealth(float amount)
@@ -43,26 +43,10 @@ public class Health : Bolt.EntityBehaviour<ICustomCubeState>
         state.Health = maxHealth;
     }
 
-    //TODO: remove. This is for testing.
-    private void Update()
-    {
-        if (entity.IsOwner)
-        {
-            if (Input.GetKey(KeyCode.H))
-            {
-                ModifyHealth(-1);
-            }
-
-            if (Input.GetKey(KeyCode.J))
-            {
-                ModifyHealth(1);
-            }
-        }
-    }
 
    public override void Attached()
    {
-       state.Health = currentHealth;
+       if (entity.IsOwner) state.Health = currentHealth;
        state.AddCallback("Health", HealthCallback);
    }
 
@@ -74,11 +58,9 @@ public class Health : Bolt.EntityBehaviour<ICustomCubeState>
        
        if (currentHealth <= 0)
        {
-        //    OnDeath();
         var death = DeathEvent.Create(entity);
         death.Send();
         OnDeathOccured();
-        //    BoltNetwork.Destroy(gameObject);
        }
    }
 
