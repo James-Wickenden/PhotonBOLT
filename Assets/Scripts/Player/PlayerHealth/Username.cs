@@ -22,6 +22,11 @@ public class Username : Bolt.EntityBehaviour<ICustomCubeState>
         Debug.Log("username set: " + username);
     }
 
+    public string getUsername()
+    {
+        return username;
+    }
+
     public override void Attached()
     {
         state.AddCallback("Username", UserNameCallback);

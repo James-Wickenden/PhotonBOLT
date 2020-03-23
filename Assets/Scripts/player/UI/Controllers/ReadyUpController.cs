@@ -7,7 +7,9 @@ using UnityEngine.UI;
 public class ReadyUpController : Bolt.GlobalEventListener
 {
     public GameObject readyUpPanel;
+    public GameObject scoreboardPanel;
     public GameObject controlPanel;
+    public Text readyUpButtonText;
     public InputField usernameInput;
 
     public GameObject readyButton;
@@ -37,10 +39,10 @@ public class ReadyUpController : Bolt.GlobalEventListener
         readyUpPanel.SetActive(true);
     }
 
-    public void readyUp()
+    public void toggleReady()
     {
         selectedName = usernameInput.text;
-        if (!readyPlayers.Contains(selectedName))
+        if (!isReady)
         {
             claimUsername(selectedName);
             OnReadyUp(selectedName);
@@ -52,10 +54,12 @@ public class ReadyUpController : Bolt.GlobalEventListener
         }
         else
         {
-            // Show error msg
-            Debug.Log("ERROR: username \'" + selectedName + "\' was taken.");
+            // unready the player
+            isReady = false;
+            readyUpButtonText.text = "Ready Up!";
+            // TODO: remove the player from the username and isready pools
+            freeUsername(selectedName);
         }
-        // else ready up failed.
     }
 
     public void unReadyUp()
@@ -97,7 +101,7 @@ public class ReadyUpController : Bolt.GlobalEventListener
         {
             readyUpPanel.SetActive(false);
             controlPanel.SetActive(true);
-
+            scoreboardPanel.SetActive(true);
             OnAllPlayersReady();
 
             gameStarted = true;

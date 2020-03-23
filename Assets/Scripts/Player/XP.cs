@@ -58,6 +58,9 @@ public class XP : Bolt.EntityBehaviour<ICustomCubeState>
             {
                 Debug.Log("Player obtains credit of 10");
                 state.UpgradeCredit += 10;
+
+                // Player is given the opportunity to upgrade their tank here using upgrade credit
+
             }
         }
     }

@@ -11,6 +11,7 @@ public class Scoreboard : Bolt.GlobalEventListener
     public GameObject modelScoreboard;
     private GameObject scoreboard;
     private Text playerScores;
+    private Dictionary<string, int> scoreMap;
     
     private void Start() {
         scoreboard = Instantiate(modelScoreboard, GameObject.FindGameObjectWithTag("Canvas").transform);
@@ -20,6 +21,8 @@ public class Scoreboard : Bolt.GlobalEventListener
         scoreboardButton.onClick.AddListener(() => ToggleScoreboard());
         scoreboard.SetActive(false);
         //Debug.Log("Initialised scoreboard listener");
+
+        scoreMap = new Dictionary<string, int>();
     }
 
     private void ToggleScoreboard() {
@@ -43,41 +46,40 @@ public class Scoreboard : Bolt.GlobalEventListener
     }
 
     private void refreshScoreboard() {
-        Dictionary<int, string> scoreMap = new Dictionary<int, string>();
-        scoreMap.Clear();
-
-        // TODO: Fix this!
-        // BoltNetwork.Connections and BoltNetwork.Clients both returns empty lists!
-        // PlayerScores are not implemented and must be connected to a player/tank instance!
-
-        string playerID;
-        int playerScore;
-        foreach (var player in BoltNetwork.Entities)
-        {
-            
-            // Placeholder values
-            playerScore = player.GetComponent<XP>().GetXP();
-            playerID = player.NetworkId.ToString();
-            scoreMap.Add(playerScore, playerID);
-        }
-
-        Debug.Log(scoreMap.Count + " players found in server and parsed into scoreboard");
+        //Debug.Log(scoreMap.Count + " players found in server and parsed into scoreboard");
         parseScoreMap(scoreMap);
     }
 
-    private void parseScoreMap(Dictionary<int, string> scoreMap) {
+    private void parseScoreMap(Dictionary<string, int> scoreMap) {
         playerScores.text = "";
 
         // Sorts the player-score map by scores;
         // then writes the player-score pairs to the playerScores text field.
-        List<int> scores = scoreMap.Keys.ToList();
-        scores.Sort();
 
-        foreach (int score in scores) {
-            playerScores.text += scoreMap[score];
+        // this iterates through key-value pairs sorted by value, ties are sorted by key
+        foreach (KeyValuePair<string, int> score in scoreMap.OrderByDescending(x => x.Value).ThenBy(x => x.Key))
+        { 
+            playerScores.text += score.Key;
             playerScores.text += " : ";
-            playerScores.text += score;
+            playerScores.text += score.Value;
             playerScores.text += '\n';
         }
+    }
+
+    public override void OnEvent(PlayerScoreEvent evnt)
+    {
+        scoreMap[evnt.username] = evnt.score;
+        Debug.Log("score for " + evnt.username + " set to " + evnt.score);
+
+        // refresh the scoreboard if it's open
+        if (isScoreboardOpen)
+        {
+            refreshScoreboard();
+        }
+    }
+
+    public override void OnEvent(SetScoreEvent evnt)
+    {
+        if (!scoreMap.Keys.Contains(evnt.username)) scoreMap.Add(evnt.username, 0);
     }
 }
