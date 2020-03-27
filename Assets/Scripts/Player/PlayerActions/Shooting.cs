@@ -23,6 +23,13 @@ public class Shooting : Bolt.EntityBehaviour<ICustomCubeState>
     private bool animStart = false;
     private float startTime;
 
+    private bool readyToShoot = true;
+
+    [SerializeField]
+    private float shootingCooldownDuration = 1.0f;
+
+    private float shootingCooldown = 0;
+
 
     public override void Attached()
     {
@@ -44,19 +51,28 @@ public class Shooting : Bolt.EntityBehaviour<ICustomCubeState>
 
     private void Shoot()
     { 
-        Rigidbody bulletClone = Instantiate(bulletPrefab, muzzle.transform.position, this.transform.rotation);
-        
+        // check if readyToShoot
+        if (readyToShoot) {
+            Rigidbody bulletClone = Instantiate(bulletPrefab, muzzle.transform.position, this.transform.rotation);
 
-        Projectile projectile = bulletClone.GetComponent<Projectile>();
-        projectile.setSourceID(GetInstanceID());
-        projectile.setSourceNetworkID(entity.NetworkId);
+            Projectile projectile = bulletClone.GetComponent<Projectile>();
+            projectile.setSourceID(GetInstanceID());
+            projectile.setSourceNetworkID(entity.NetworkId);
 
-        bulletClone.velocity = muzzle.transform.forward * projectile.getSpeed();
-        bulletClone.transform.rotation = muzzle.transform.rotation;
+            bulletClone.velocity = muzzle.transform.forward * projectile.getSpeed();
+            bulletClone.transform.rotation = muzzle.transform.rotation;
 
 
-        startTime = Time.time;
-        animStart = true;
+            startTime = Time.time;
+            animStart = true;
+
+            // shooting cooldown
+            readyToShoot = false;
+            shootingCooldown = shootingCooldownDuration;
+            Debug.Log("Cooldown start");
+        }
+
+
     }
 
     private void Update()
@@ -81,6 +97,19 @@ public class Shooting : Bolt.EntityBehaviour<ICustomCubeState>
             {
                 state.Shoot();
                 Debug.Log("SHOOT");
+            }
+        }
+    }
+
+    private void LateUpdate() {
+        if (shootingCooldown > 0)
+        {
+            shootingCooldown -= Time.deltaTime;
+            
+            if (shootingCooldown <= 0)
+            {
+                readyToShoot = true;
+                Debug.Log("Cooldown end");
             }
         }
     }
