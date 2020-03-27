@@ -12,7 +12,11 @@ public class ReadyUpController : Bolt.GlobalEventListener
     public Text readyUpButtonText;
     public InputField usernameInput;
 
-    public int minPlayers;
+    public GameObject readyButton;
+    public GameObject unReadyButton;
+
+
+    public int minPlayers = 2;
 
     public HashSet<string> readyPlayers = new HashSet<string>();
 
@@ -21,6 +25,8 @@ public class ReadyUpController : Bolt.GlobalEventListener
 
     private bool isReady = false;
     private string selectedName;
+
+    private bool gameStarted = false;
 
     void Start()
     {
@@ -38,19 +44,13 @@ public class ReadyUpController : Bolt.GlobalEventListener
         selectedName = usernameInput.text;
         if (!isReady)
         {
-            if (!readyPlayers.Contains(selectedName))
-            {
-                claimUsername(selectedName);
-                OnReadyUp(selectedName);
-                isReady = true;
-                readyUpButtonText.text = "Unready";
-            }
-            else
-            {
-                // Show error msg
-                Debug.Log("ERROR: username \'" + selectedName + "\' was taken.");
-            }
-            // else ready up failed.
+            claimUsername(selectedName);
+            OnReadyUp(selectedName);
+            isReady = true;
+
+            readyButton.SetActive(false);
+            unReadyButton.SetActive(true);
+
         }
         else
         {
@@ -60,6 +60,19 @@ public class ReadyUpController : Bolt.GlobalEventListener
             // TODO: remove the player from the username and isready pools
             freeUsername(selectedName);
         }
+    }
+
+    public void unReadyUp()
+    {
+        if (isReady)
+        {
+            isReady = false;
+            freeUsername(selectedName);
+
+            readyButton.SetActive(true);
+            unReadyButton.SetActive(false);
+        }
+        
     }
 
     private void queryUserNames()
@@ -77,25 +90,32 @@ public class ReadyUpController : Bolt.GlobalEventListener
 
     private void freeUsername(string username)
     {
-        readyPlayers.Remove(username);
+        var unReadyUp = UnReadyEvent.Create();
+        unReadyUp.Username = username;
+        unReadyUp.Send();
     }
 
     public void Update()
     {
-        if (readyPlayers.Count >= minPlayers)
+        if (readyPlayers.Count >= minPlayers && !gameStarted)
         {
             readyUpPanel.SetActive(false);
             controlPanel.SetActive(true);
             scoreboardPanel.SetActive(true);
             OnAllPlayersReady();
 
-            readyPlayers.Clear();
+            gameStarted = true;
         }
     }
 
     public override void OnEvent(ReadyUpEvent evnt)
     {
         readyPlayers.Add(evnt.Username);
+    }
+
+    public override void OnEvent(UnReadyEvent evnt)
+    {
+        readyPlayers.Remove(evnt.Username);
     }
 
     public override void OnEvent(QueryReadyPlayersEvent evnt)
