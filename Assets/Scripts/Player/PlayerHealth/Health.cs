@@ -62,7 +62,7 @@ public class Health : Bolt.EntityBehaviour<ICustomCubeState>
         if (currentHealth <= 0)
        {
             //OnDeathOccuring();
-
+            SoundManagerScript.playTankDestroySound();
             var death = DeathEvent.Create(entity);
             death.Send();
             OnDeathOccured();

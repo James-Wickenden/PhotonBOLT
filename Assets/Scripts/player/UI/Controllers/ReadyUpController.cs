@@ -32,6 +32,7 @@ public class ReadyUpController : Bolt.GlobalEventListener
     {
         NetworkCallbacks.OnSceneLoadDone += showReadyUpMenu;
         queryUserNames();
+
     }
 
     public void showReadyUpMenu()
@@ -50,6 +51,8 @@ public class ReadyUpController : Bolt.GlobalEventListener
 
             readyButton.SetActive(false);
             unReadyButton.SetActive(true);
+
+            SoundManagerScript.playReadyUpSound();
 
         }
         else
